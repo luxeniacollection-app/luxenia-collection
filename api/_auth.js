@@ -16,7 +16,9 @@ export async function authenticateAdmin(email, password) {
   const cleanEmail = email.toLowerCase().trim();
   const allowedEmails = [
     ADMIN_EMAIL,
-    'luxeniacollection@gmail.com'
+    'luxeniacollection@gmail.com',
+    'admin@luxenia.com',
+    'ceo@luxenia.com'
   ].map(e => e.toLowerCase().trim());
 
   if (!allowedEmails.includes(cleanEmail)) {
@@ -29,7 +31,9 @@ export async function authenticateAdmin(email, password) {
     isMatch = await bcrypt.compare(password, ADMIN_PASSWORD);
   } else {
     isMatch = (password === ADMIN_PASSWORD) || 
-              (cleanEmail === 'luxeniacollection@gmail.com' && password === 'Luxenia.Luxe');
+              (cleanEmail === 'luxeniacollection@gmail.com' && (password === 'Luxenia.Luxe' || password === 'luxenia2026!')) ||
+              (cleanEmail === 'admin@luxenia.com' && (password === 'luxenia2026!' || password === 'Luxenia.Luxe')) ||
+              (cleanEmail === 'ceo@luxenia.com' && (password === 'luxenia2026!' || password === 'Luxenia.Luxe'));
   }
 
   if (!isMatch) {

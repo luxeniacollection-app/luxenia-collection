@@ -295,7 +295,7 @@
     }
   ],
   "version": "1.0.0",
-  "lastUpdated": "2026-09-04T22:15:18.470Z",
+  "lastUpdated": "2026-09-07T20:39:22.363Z",
   "customers": [
     {
       "id": "cust-796336",
@@ -431,6 +431,40 @@
     }
   ],
   "orders": [
+    {
+      "id": "LN-ORD-562353",
+      "customer_name": "VIP Client",
+      "customer_contact": "vip.client@example.com",
+      "status": "delayed",
+      "payment_status": "paid",
+      "items": [
+        {
+          "order_id": "LN-ORD-562353",
+          "product_id": "prod-587049",
+          "name": "The Sovereign Baguette Flap Bag — Ivory Pearl",
+          "quantity": 2,
+          "price_at_purchase": 5800,
+          "image": "",
+          "color": null,
+          "size": null
+        }
+      ],
+      "total": 11600,
+      "created_at": "2026-09-07T20:39:22.353Z",
+      "date": "2026-09-07T20:39:22.353Z",
+      "customerName": "VIP Client",
+      "customerEmail": "vip.client@example.com",
+      "mpesaPhone": "",
+      "paymentMethod": "M-Pesa / WhatsApp Concierge",
+      "delivery_address": "Nairobi Delivery",
+      "shippingAddress": {
+        "fullName": "VIP Client",
+        "phone": "vip.client@example.com",
+        "address": "Nairobi Delivery",
+        "city": "Nairobi"
+      },
+      "updated_at": "2026-09-07T20:39:22.363Z"
+    },
     {
       "id": "LN-ORD-TEST-5485",
       "date": "2026-09-03T00:19:45.489Z",
