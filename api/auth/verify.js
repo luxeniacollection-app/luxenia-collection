@@ -16,7 +16,7 @@ export default async function handler(req, res) {
     authenticated: true,
     admin: {
       email: admin.email,
-      name: 'LUXE NIA Atelier Director',
+      name: 'Atelier Administrator',
       role: 'admin'
     }
   });

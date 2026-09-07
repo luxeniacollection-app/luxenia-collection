@@ -5,6 +5,7 @@ import { WhatsAppIcon } from './SocialIcons';
 import { useCart } from '../../context/CartContext';
 import { useProducts } from '../../context/ProductContext';
 import { useToast } from './Toast';
+import { useWhatsAppOrder } from '../../context/WhatsAppOrderContext';
 import { getWhatsAppProductOrderUrl, OFFICIAL_DISPLAY_PHONE } from '../../utils/whatsapp';
 
 export default function QuickViewModal({ product, isOpen, onClose }) {
@@ -12,6 +13,7 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
   const { reduceStock } = useProducts();
   const { addToCart, formatPrice } = useCart();
   const { addToast } = useToast();
+  const { openWhatsAppOrder } = useWhatsAppOrder();
 
   const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0] || 'Classic Baguette (28cm)');
   const [selectedColor, setSelectedColor] = useState(product?.colors?.[0] || null);
@@ -48,11 +50,13 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
       onClose();
       return;
     }
-    if (reduceStock) {
-      reduceStock([{ id: product.id, quantity }]);
-    }
-    const url = getWhatsAppProductOrderUrl(product, selectedColor, selectedSize, quantity);
-    window.open(url, '_blank', 'noopener,noreferrer');
+    openWhatsAppOrder({
+      bagName: product.name,
+      quantity,
+      bagPrice: product.priceKes,
+      totalPrice: (Number(product.priceKes) || 5800) * quantity,
+      image: activeImage || product.image
+    });
     onClose();
   };
 

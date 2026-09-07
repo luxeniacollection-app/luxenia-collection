@@ -45,6 +45,7 @@ import {
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import { useProducts } from '../../context/ProductContext';
 import { useToast } from '../common/Toast';
+import { useTheme } from '../../context/ThemeContext';
 import Logo from '../common/Logo';
 import { sampleInitialOrders, brandInfo } from '../../data/mockData';
 
@@ -54,6 +55,7 @@ export default function AdminDashboard({ initialTab }) {
   const { adminUser, logout, getAuthHeaders } = useAdminAuth();
   const { products, refreshProducts, addProduct, updateProduct, deleteProduct } = useProducts();
   const { addToast } = useToast();
+  const { isDarkMode, toggleTheme } = useTheme();
 
   // Determine active tab from prop, URL pathname, or default to 'dashboard'
   const getTabFromPath = () => {
@@ -115,7 +117,7 @@ export default function AdminDashboard({ initialTab }) {
     return {
       storeName: 'Luxe Nia Collections',
       tagline: 'Timeless Opulence & Contemporary African Luxury',
-      atelierAddress: 'The Penthouse Suite, Delta Corner Tower, Westlands, Nairobi',
+      atelierAddress: 'Web-based online Nairobi and delivery is done country wide',
       phone: '+254 795 439 545',
       whatsappPhone: '0795439545',
       email: 'luxeniacollection@gmail.com',
@@ -164,6 +166,7 @@ export default function AdminDashboard({ initialTab }) {
   const [formData, setFormData] = useState(initialForm);
   const [imagePreview, setImagePreview] = useState('');
   const fileInputRef = useRef(null);
+  const modalFileInputRef = useRef(null);
 
   // Refresh products on mount
   useEffect(() => {
@@ -480,20 +483,21 @@ export default function AdminDashboard({ initialTab }) {
   ];
 
   return (
-    <div style={{ minHeight: '100vh', background: '#07070A', color: 'var(--text-primary)', fontFamily: 'var(--font-sans)', display: 'flex', flexDirection: 'column' }}>
+    <div className="admin-dashboard" style={{ minHeight: '100vh', background: 'var(--bg-black)', color: 'var(--text-primary)', fontFamily: 'var(--font-sans)', display: 'flex', flexDirection: 'column' }}>
       
       {/* =================================================================
           1. TOP LUXURY ADMIN HEADER
           ================================================================= */}
       <header 
+        className="admin-top-header"
         style={{
-          background: 'linear-gradient(180deg, #13121E 0%, #09090D 100%)',
+          background: isDarkMode ? 'linear-gradient(180deg, #13121E 0%, #09090D 100%)' : 'linear-gradient(180deg, #FAF8F5 0%, #F3EFEA 100%)',
           borderBottom: '1px solid var(--border-gold)',
           padding: '1rem 2rem',
           position: 'sticky',
           top: 0,
           zIndex: 50,
-          boxShadow: '0 4px 30px rgba(0,0,0,0.85)'
+          boxShadow: isDarkMode ? '0 4px 30px rgba(0,0,0,0.85)' : '0 4px 20px rgba(30,25,20,0.06)'
         }}
       >
         <div style={{ maxWidth: '1440px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
@@ -512,13 +516,40 @@ export default function AdminDashboard({ initialTab }) {
                 </span>
               </div>
               <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
-                {adminUser?.name || 'Administrator'} ({adminUser?.email || 'admin@luxenia.com'})
+                {adminUser?.name || 'Luxe Nia CEO / Administrator'} ({adminUser?.email || 'luxeniacollection@gmail.com'})
               </span>
             </div>
           </div>
 
           {/* Right Global Actions */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+            {/* Light / Dark Mode Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="theme-toggle-btn"
+              title={isDarkMode ? 'Switch to Light Mode (☀️)' : 'Switch to Dark Mode (🌙)'}
+              aria-label={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              id="admin-theme-toggle"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '0.55rem 0.95rem',
+                borderRadius: 'var(--radius-xs)',
+                fontSize: '0.82rem',
+                cursor: 'pointer',
+                fontWeight: '600',
+                background: isDarkMode ? 'rgba(212,175,55,0.12)' : 'rgba(196,152,38,0.14)',
+                border: '1px solid var(--border-gold)',
+                color: 'var(--gold-400)',
+                width: 'auto',
+                height: 'auto'
+              }}
+            >
+              <span style={{ fontSize: '1rem', lineHeight: 1 }}>{isDarkMode ? '☀️' : '🌙'}</span>
+              <span>{isDarkMode ? 'Light' : 'Dark'}</span>
+            </button>
+
             {/* View Customer Storefront */}
             <Link
               to="/shop"
@@ -597,8 +628,9 @@ export default function AdminDashboard({ initialTab }) {
           2. LUXURY ATELIER NAVIGATION BAR (PRIMARY MENU BUTTONS)
           ================================================================= */}
       <nav 
+        className="admin-top-nav"
         style={{
-          background: 'rgba(18, 17, 28, 0.95)',
+          background: isDarkMode ? 'rgba(18, 17, 28, 0.95)' : 'rgba(250, 248, 245, 0.96)',
           borderBottom: '1px solid rgba(212, 175, 55, 0.25)',
           padding: '0.65rem 2rem',
           backdropFilter: 'blur(10px)',
@@ -1470,13 +1502,14 @@ export default function AdminDashboard({ initialTab }) {
                     />
                     <button
                       type="button"
+                      id="btn-import-file-tab"
                       onClick={() => fileInputRef.current?.click()}
                       disabled={isUploadingImage}
                       style={{
                         width: '100%',
                         padding: '0.85rem',
                         border: '1px dashed var(--border-gold)',
-                        background: 'rgba(212,175,55,0.06)',
+                        background: 'rgba(212,175,55,0.1)',
                         color: 'var(--gold-300)',
                         borderRadius: 'var(--radius-xs)',
                         cursor: 'pointer',
@@ -1484,12 +1517,14 @@ export default function AdminDashboard({ initialTab }) {
                         alignItems: 'center',
                         justifyContent: 'center',
                         gap: '8px',
-                        fontSize: '0.85rem',
-                        marginBottom: '0.5rem'
+                        fontSize: '0.88rem',
+                        fontWeight: '700',
+                        marginBottom: '0.5rem',
+                        transition: 'background 0.2s ease'
                       }}
                     >
-                      <Upload size={16} />
-                      <span>{isUploadingImage ? 'Uploading Image...' : 'Click to Upload High-Res Image from Computer'}</span>
+                      <Upload size={18} color="var(--gold-400)" />
+                      <span>{isUploadingImage ? 'Importing Image...' : 'Import File (Choose Bag Image from Computer)'}</span>
                     </button>
                     <input
                       type="text"
@@ -2307,26 +2342,117 @@ export default function AdminDashboard({ initialTab }) {
                 </div>
               </div>
 
+              {/* Product Image Upload & Preview in Modal */}
               <div className="form-group" style={{ marginBottom: '1.25rem' }}>
-                <label className="form-label" style={{ color: 'var(--gold-300)', fontSize: '0.84rem' }}>Image URL or Upload</label>
-                <div style={{ display: 'flex', gap: '10px' }}>
-                  <input
-                    type="text"
-                    value={formData.image}
-                    onChange={(e) => {
-                      setFormData({ ...formData, image: e.target.value });
-                      setImagePreview(e.target.value);
+                <label className="form-label" style={{ color: 'var(--gold-300)', fontSize: '0.84rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <ImageIcon size={14} />
+                    <span>Handbag Image & Preview *</span>
+                  </span>
+                  {(imagePreview || formData.image) && (
+                    <span style={{ fontSize: '0.74rem', color: '#34D399', fontWeight: '600' }}>
+                      ✓ Image Ready for Saving
+                    </span>
+                  )}
+                </label>
+
+                {/* Hidden Native File Input for Modal */}
+                <input
+                  type="file"
+                  id="modal-bag-file-picker"
+                  ref={modalFileInputRef}
+                  onChange={handleImageFileChange}
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                />
+
+                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                  {/* Bag Image Preview Box */}
+                  <div 
+                    style={{ 
+                      width: '84px', 
+                      height: '84px', 
+                      borderRadius: 'var(--radius-xs)', 
+                      border: '1px solid var(--border-gold)', 
+                      overflow: 'hidden', 
+                      flexShrink: 0, 
+                      background: '#09080E',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
                     }}
-                    placeholder="/images/products/..."
-                    className="form-input"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => fileInputRef.current?.click()}
-                    style={{ background: 'rgba(212,175,55,0.15)', border: '1px solid var(--border-gold)', color: 'var(--gold-300)', padding: '0 14px', borderRadius: 'var(--radius-xs)', fontSize: '0.78rem', cursor: 'pointer', whiteSpace: 'nowrap' }}
                   >
-                    Upload File
-                  </button>
+                    {imagePreview || formData.image ? (
+                      <img 
+                        src={imagePreview || formData.image} 
+                        alt="Bag Preview" 
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                      />
+                    ) : (
+                      <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.7rem' }}>
+                        <ImageIcon size={22} style={{ margin: '0 auto 4px', opacity: 0.5 }} />
+                        <span>No image</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div style={{ flex: 1, minWidth: '220px' }}>
+                    <div style={{ display: 'flex', gap: '8px', marginBottom: '8px', flexWrap: 'wrap' }}>
+                      {/* Fully Functional Import File Button */}
+                      <button
+                        type="button"
+                        id="btn-import-file-modal"
+                        onClick={() => modalFileInputRef.current?.click()}
+                        disabled={isUploadingImage}
+                        className="btn-gold"
+                        style={{
+                          padding: '0.6rem 1.25rem',
+                          fontSize: '0.84rem',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '7px',
+                          cursor: 'pointer',
+                          fontWeight: '700'
+                        }}
+                      >
+                        <Upload size={15} />
+                        <span>{isUploadingImage ? 'Importing...' : 'Import File'}</span>
+                      </button>
+
+                      {(imagePreview || formData.image) && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setImagePreview('');
+                            setFormData(prev => ({ ...prev, image: '' }));
+                          }}
+                          style={{
+                            background: 'rgba(239,68,68,0.15)',
+                            border: '1px solid rgba(239,68,68,0.3)',
+                            color: '#F87171',
+                            padding: '0.6rem 0.9rem',
+                            borderRadius: 'var(--radius-xs)',
+                            fontSize: '0.78rem',
+                            cursor: 'pointer'
+                          }}
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
+
+                    <input
+                      type="text"
+                      value={formData.image}
+                      onChange={(e) => {
+                        setFormData({ ...formData, image: e.target.value });
+                        setImagePreview(e.target.value);
+                      }}
+                      placeholder="Or enter direct image URL (/images/products/...)"
+                      className="form-input"
+                      style={{ fontSize: '0.82rem', height: '36px' }}
+                    />
+                  </div>
                 </div>
               </div>
 

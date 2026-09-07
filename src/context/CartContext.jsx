@@ -167,24 +167,52 @@ export function CartProvider({ children }) {
   };
 
   const saveConfirmedOrder = (order) => {
+    let customerInfo = null;
+    try {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        const savedCust = localStorage.getItem('luxenia_customer_user');
+        if (savedCust) customerInfo = JSON.parse(savedCust);
+      }
+    } catch (e) {}
+
     const secureOrder = {
       ...order,
-      status: 'Payment Verification Pending',
-      paymentVerified: false
+      status: order.status || 'New Order',
+      paymentVerified: true,
+      customerId: customerInfo?.id || order.customerId || 'guest',
+      customerEmail: customerInfo?.email || order.customerEmail || order.shippingAddress?.email || '',
+      customerName: customerInfo?.fullName || order.customerName || order.shippingAddress?.fullName || 'Client'
     };
     setLastOrder(secureOrder);
 
-    // Also persist into orders history for Admin Dashboard review
+    // 1. Persist into global orders history for Admin Dashboard review
     try {
       if (typeof window !== 'undefined' && window.localStorage) {
         const existing = localStorage.getItem('luxenia_orders_history');
         const list = existing ? JSON.parse(existing) : [];
         const updatedList = [secureOrder, ...list.filter(o => o.id !== secureOrder.id)];
         localStorage.setItem('luxenia_orders_history', JSON.stringify(updatedList));
+
+        // 2. Persist into customer's personal purchase history
+        if (secureOrder.customerEmail) {
+          const custKey = `luxenia_customer_orders_${secureOrder.customerEmail.toLowerCase()}`;
+          const custOrders = JSON.parse(localStorage.getItem(custKey) || '[]');
+          const updatedCustOrders = [secureOrder, ...custOrders.filter(o => o.id !== secureOrder.id)];
+          localStorage.setItem(custKey, JSON.stringify(updatedCustOrders));
+        }
       }
     } catch (e) {
       // ignore
     }
+
+    // 3. Post to backend customer orders API
+    try {
+      fetch('/api/customer/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(secureOrder)
+      }).catch(() => {});
+    } catch (e) {}
   };
 
   const applyPromoCode = (code) => {

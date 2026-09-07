@@ -81,6 +81,7 @@ export default function HomePage() {
       >
         {/* Ambient Gold Radial Glow */}
         <div 
+          className="ambient-glow"
           style={{
             position: 'absolute',
             top: '20%',
@@ -223,6 +224,7 @@ export default function HomePage() {
               return (
                 <div
                   key={idx}
+                  className="heritage-card"
                   style={{
                     background: 'linear-gradient(160deg, #13121C 0%, #09090D 100%)',
                     border: '1px solid var(--border-gold)',
@@ -318,6 +320,7 @@ export default function HomePage() {
               return (
                 <div
                   key={idx}
+                  className={`experience-pillar-card ${isHovered ? 'active-pillar' : ''}`}
                   onMouseEnter={() => setActivePillar(idx)}
                   style={{
                     background: isHovered 
@@ -396,6 +399,7 @@ export default function HomePage() {
       >
         {/* Subtle Ambient Background Watermark */}
         <div 
+          className="brand-statement-watermark"
           style={{
             position: 'absolute',
             top: '50%',

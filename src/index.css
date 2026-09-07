@@ -4,14 +4,14 @@
    ========================================================================== */
 
 :root {
-  /* Colors */
-  --bg-black: #08080A;
-  --bg-deep: #0E0E12;
-  --bg-card: #14141A;
-  --bg-card-hover: #1A1A22;
-  --bg-glass: rgba(18, 18, 24, 0.85);
-  --bg-glass-heavy: rgba(10, 10, 14, 0.95);
-  --bg-input: #121217;
+  /* Colors - Luxurious Noir & Jewel Tones */
+  --bg-black: #08070F;
+  --bg-deep: #100D1B;
+  --bg-card: rgba(18, 15, 27, 0.82);
+  --bg-card-hover: rgba(26, 22, 38, 0.92);
+  --bg-glass: rgba(18, 15, 27, 0.82);
+  --bg-glass-heavy: rgba(10, 9, 16, 0.95);
+  --bg-input: rgba(18, 15, 27, 0.88);
   
   /* 24K Gold Palette */
   --gold-300: #F9E498;
@@ -68,6 +68,211 @@
   --radius-full: 9999px;
 }
 
+/* ==========================================================================
+   LUXE NIA LIGHT MODE THEME SYSTEM
+   Crisp Alabaster / Cashmere Cream & Warm 24K Gold
+   ========================================================================== */
+[data-theme="light"],
+body.light-mode {
+  /* Colors */
+  --bg-black: #FAF8F5;
+  --bg-deep: #F3EFEA;
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --bg-card-hover: rgba(248, 245, 240, 0.95);
+  --bg-glass: rgba(255, 255, 255, 0.92);
+  --bg-glass-heavy: rgba(250, 248, 245, 0.97);
+  --bg-input: #FFFFFF;
+
+  /* 24K Gold Palette Tailored for Light Mode Contrast */
+  --gold-300: #996F16;
+  --gold-400: #A87B1D;
+  --gold-500: #C49826;
+  --gold-600: #966D21;
+  --gold-700: #785516;
+  --gold-gradient: linear-gradient(135deg, #ECC86A 0%, #C49826 50%, #8B6214 100%);
+  --gold-gradient-soft: linear-gradient(135deg, rgba(196, 152, 38, 0.16) 0%, rgba(139, 98, 20, 0.08) 100%);
+  --gold-shimmer: linear-gradient(90deg, #C49826 0%, #F5E6B5 50%, #C49826 100%);
+
+  /* Text Colors */
+  --text-pure-white: #141416;
+  --text-primary: #1A191F;
+  --text-secondary: #4A4754;
+  --text-muted: #737082;
+  --text-gold: #996F16;
+
+  /* Borders */
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-gold: rgba(196, 152, 38, 0.38);
+  --border-gold-bright: rgba(196, 152, 38, 0.8);
+  --border-card: rgba(0, 0, 0, 0.06);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(30, 25, 20, 0.06);
+  --shadow-md: 0 8px 24px rgba(30, 25, 20, 0.08);
+  --shadow-lg: 0 16px 48px rgba(30, 25, 20, 0.12);
+  --shadow-gold: 0 4px 20px rgba(196, 152, 38, 0.18);
+  --shadow-gold-hover: 0 8px 30px rgba(196, 152, 38, 0.3);
+}
+
+/* Light Mode Overrides */
+body.light-mode {
+  background-color: #FAF8F5;
+  background-image: 
+    radial-gradient(ellipse 950px 750px at 12% 10%, rgba(244, 114, 182, 0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 900px 700px at 88% 18%, rgba(96, 165, 250, 0.20) 0%, transparent 68%),
+    radial-gradient(ellipse 800px 800px at 50% 50%, rgba(251, 191, 36, 0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 950px 750px at 85% 82%, rgba(192, 132, 252, 0.22) 0%, transparent 70%),
+    radial-gradient(ellipse 900px 700px at 12% 85%, rgba(52, 211, 153, 0.18) 0%, transparent 68%),
+    radial-gradient(ellipse 650px 650px at 50% 90%, rgba(244, 114, 182, 0.15) 0%, transparent 65%),
+    linear-gradient(180deg, #FAF8F5 0%, #F5F0EA 35%, #F8F5F0 70%, #FAF8F5 100%);
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: var(--text-primary);
+}
+
+body.light-mode ::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+
+body.light-mode ::-webkit-scrollbar-thumb {
+  background: #D8D2C6;
+}
+
+body.light-mode ::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-500);
+}
+
+body.light-mode .announcement-bar {
+  background: linear-gradient(90deg, #F3EFEA 0%, #FAF7F2 50%, #F3EFEA 100%);
+  border-bottom: 1px solid var(--border-gold);
+  color: var(--gold-400);
+}
+
+body.light-mode .main-header {
+  background: var(--bg-glass-heavy);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+body.light-mode .main-header.scrolled {
+  border-bottom: 1px solid var(--border-gold);
+  box-shadow: 0 8px 25px rgba(30, 25, 20, 0.06);
+}
+
+body.light-mode .main-footer {
+  background: #EFE9E0 !important;
+  border-top: 1px solid rgba(196, 152, 38, 0.35) !important;
+}
+
+body.light-mode .btn-dark {
+  background: #FFFFFF;
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+body.light-mode .btn-dark:hover {
+  background: #FAF7F2;
+  border-color: var(--border-gold);
+  color: var(--gold-400);
+}
+
+body.light-mode .product-card {
+  box-shadow: 0 8px 25px rgba(30, 25, 20, 0.07);
+}
+
+body.light-mode .product-card:hover {
+  box-shadow: 0 16px 36px rgba(30, 25, 20, 0.12), 0 0 20px rgba(196, 152, 38, 0.2);
+}
+
+body.light-mode .product-card-image-wrap {
+  background: #F4EFEA;
+}
+
+body.light-mode .product-placeholder-frame {
+  background: radial-gradient(circle at center, #FFFFFF 0%, #F3EFEA 100%);
+  border-color: rgba(196, 152, 38, 0.25);
+}
+
+body.light-mode .product-placeholder-frame::before {
+  border-color: rgba(196, 152, 38, 0.3);
+}
+
+body.light-mode .product-card-wishlist-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: var(--text-primary);
+}
+
+body.light-mode .modal-backdrop {
+  background: rgba(20, 18, 22, 0.6);
+}
+
+body.light-mode .modal-close-btn {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text-secondary);
+}
+
+body.light-mode .modal-close-btn:hover {
+  background: rgba(196, 152, 38, 0.2);
+  color: var(--gold-400);
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid var(--border-gold);
+  color: var(--gold-300);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(212, 175, 55, 0.24);
+  border-color: var(--gold-400);
+  color: var(--gold-400);
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.35);
+  transform: scale(1.06);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+body.light-mode .theme-toggle-btn {
+  background: rgba(196, 152, 38, 0.14);
+  border: 1px solid var(--border-gold);
+  color: var(--gold-400);
+}
+
+body.light-mode .theme-toggle-btn:hover {
+  background: rgba(196, 152, 38, 0.24);
+  box-shadow: 0 0 16px rgba(196, 152, 38, 0.3);
+}
+
+.mobile-theme-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.1rem;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.mobile-theme-toggle-row:hover {
+  background: rgba(212, 175, 55, 0.16);
+}
+
 /* --------------------------------------------------------------------------
    Reset & Base Styles
    -------------------------------------------------------------------------- */
@@ -83,7 +288,18 @@ html {
 }
 
 body {
-  background-color: var(--bg-black);
+  background-color: #08070F;
+  background-image: 
+    radial-gradient(ellipse 950px 750px at 12% 10%, rgba(124, 45, 142, 0.36) 0%, transparent 70%),
+    radial-gradient(ellipse 900px 700px at 88% 18%, rgba(26, 74, 122, 0.32) 0%, transparent 68%),
+    radial-gradient(ellipse 800px 800px at 50% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 65%),
+    radial-gradient(ellipse 950px 750px at 85% 82%, rgba(153, 27, 74, 0.28) 0%, transparent 70%),
+    radial-gradient(ellipse 900px 700px at 12% 85%, rgba(13, 114, 98, 0.30) 0%, transparent 68%),
+    radial-gradient(ellipse 650px 650px at 50% 90%, rgba(112, 36, 140, 0.22) 0%, transparent 65%),
+    linear-gradient(180deg, #090812 0%, #0F0D1B 35%, #0B0A16 70%, #080710 100%);
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   color: var(--text-primary);
   font-family: var(--font-sans);
   line-height: 1.6;
@@ -1522,5 +1738,353 @@ img {
     margin-top: 0.5rem;
   }
 }
+
+/* ==========================================================================
+   ADMIN / CEO SUITE RESPONSIVE STYLES (MOBILE PHONE COMPATIBILITY)
+   ========================================================================== */
+
+@media screen and (max-width: 768px) {
+  .admin-desktop-table {
+    display: none !important;
+  }
+  .admin-mobile-cards {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.15rem !important;
+  }
+  .admin-header-inner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+  }
+  .admin-header-actions {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+  .admin-form-grid-2col {
+    grid-template-columns: 1fr !important;
+  }
+  .admin-modal-card {
+    padding: 1.5rem 1.25rem !important;
+    max-height: 92vh !important;
+    width: 95vw !important;
+  }
+  .admin-main-container {
+    padding: 1.25rem 1rem 4rem !important;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .admin-desktop-table {
+    display: block !important;
+  }
+  .admin-mobile-cards {
+    display: none !important;
+  }
+  .admin-form-grid-2col {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1.25rem !important;
+  }
+}
+
+.admin-nav-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+.admin-nav-scroll::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.4);
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   CUSTOMER STOREFRONT PAGE-SPECIFIC LIGHT MODE OVERRIDES
+   ========================================================================== */
+
+/* HomePage Sections */
+body.light-mode .luxury-hero {
+  background: radial-gradient(ellipse at 50% 35%, #FFFFFF 0%, #F5F0E8 55%, #EBE4D8 100%) !important;
+}
+
+body.light-mode .luxury-hero .ambient-glow {
+  background: radial-gradient(circle, rgba(196, 152, 38, 0.1) 0%, rgba(180, 130, 40, 0.02) 45%, transparent 70%) !important;
+}
+
+body.light-mode .home-brand-heritage {
+  background: #F3EFEA !important;
+  border-top-color: rgba(196, 152, 38, 0.2) !important;
+  border-bottom-color: rgba(196, 152, 38, 0.2) !important;
+}
+
+body.light-mode .home-brand-heritage .heritage-card {
+  background: #FFFFFF !important;
+  box-shadow: 0 10px 30px rgba(30, 25, 20, 0.08) !important;
+}
+
+body.light-mode .experience-section {
+  background: linear-gradient(180deg, #FAF8F5 0%, #F3EFEA 50%, #FAF8F5 100%) !important;
+  border-bottom-color: rgba(196, 152, 38, 0.2) !important;
+}
+
+body.light-mode .experience-pillar-card {
+  background: #FFFFFF !important;
+  box-shadow: 0 8px 24px rgba(30, 25, 20, 0.06) !important;
+}
+
+body.light-mode .experience-pillar-card.active-pillar {
+  box-shadow: 0 16px 36px rgba(30, 25, 20, 0.12), 0 0 25px rgba(196, 152, 38, 0.15) !important;
+}
+
+body.light-mode .brand-statement-section {
+  background: #EBE4D8 !important;
+}
+
+body.light-mode .brand-statement-section blockquote {
+  color: #141416 !important;
+}
+
+body.light-mode .brand-statement-watermark {
+  color: rgba(0, 0, 0, 0.035) !important;
+}
+
+body.light-mode .home-shop-cta {
+  background: radial-gradient(ellipse at 50% 50%, #FFFFFF 0%, #EFE8DC 75%) !important;
+  border-top-color: rgba(196, 152, 38, 0.25) !important;
+}
+
+/* AboutPage Sections */
+body.light-mode .about-hero-section {
+  background: radial-gradient(ellipse at 50% 20%, #FFFFFF 0%, #F5F0E8 65%, #ECE5DA 100%) !important;
+}
+
+body.light-mode .about-craft-card {
+  background: #FFFFFF !important;
+  box-shadow: 0 12px 30px rgba(30, 25, 20, 0.08) !important;
+}
+
+body.light-mode .about-cta-banner {
+  background: radial-gradient(ellipse at 50% 50%, #FFFFFF 0%, #EDE6DB 100%) !important;
+  box-shadow: 0 12px 30px rgba(30, 25, 20, 0.08) !important;
+}
+
+/* ContactPage Sections */
+body.light-mode .find-us-section {
+  background: #FFFFFF !important;
+  box-shadow: 0 16px 40px rgba(30, 25, 20, 0.07) !important;
+}
+
+body.light-mode .contact-atelier-card {
+  background: #FFFFFF !important;
+  box-shadow: 0 12px 30px rgba(30, 25, 20, 0.08) !important;
+}
+
+body.light-mode .contact-showroom-card {
+  background: #FFFFFF !important;
+  box-shadow: 0 10px 30px rgba(30, 25, 20, 0.06) !important;
+}
+
+/* ==========================================================================
+   ADMIN / CEO SUITE LIGHT MODE THEME SYSTEM
+   ========================================================================== */
+body.light-mode .admin-suite-app,
+body.light-mode .admin-dashboard {
+  background: var(--bg-black) !important;
+  color: var(--text-primary) !important;
+}
+
+body.light-mode .admin-top-header {
+  background: linear-gradient(180deg, #FAF8F5 0%, #F3EFEA 100%) !important;
+  border-bottom: 1px solid var(--border-gold) !important;
+  box-shadow: 0 4px 20px rgba(30, 25, 20, 0.06) !important;
+}
+
+body.light-mode .admin-top-nav {
+  background: rgba(250, 248, 245, 0.96) !important;
+  border-bottom: 1px solid rgba(196, 152, 38, 0.25) !important;
+}
+
+body.light-mode .admin-top-nav button {
+  color: var(--text-secondary);
+}
+
+body.light-mode .admin-dashboard div[style*="background: linear-gradient(145deg, rgb(19, 18, 28)"],
+body.light-mode .admin-dashboard div[style*="background: linear-gradient(145deg, #13121C"],
+body.light-mode .admin-dashboard div[style*="background: rgb(20, 20, 26)"],
+body.light-mode .admin-dashboard div[style*="background: #14141A"],
+body.light-mode .admin-dashboard div[style*="background: #121217"] {
+  background: #FFFFFF !important;
+  box-shadow: 0 8px 25px rgba(30, 25, 20, 0.06) !important;
+  border-color: var(--border-gold) !important;
+}
+
+body.light-mode .admin-desktop-table {
+  background: #FFFFFF !important;
+  color: var(--text-primary) !important;
+}
+
+body.light-mode .admin-desktop-table th {
+  background: #F5F0E8 !important;
+  color: var(--text-primary) !important;
+}
+
+body.light-mode .admin-desktop-table td {
+  border-bottom-color: rgba(0, 0, 0, 0.06) !important;
+  color: var(--text-primary) !important;
+}
+
+body.light-mode .admin-desktop-table tr:hover td {
+  background: #FAF7F2 !important;
+}
+
+body.light-mode .admin-mobile-cards > div {
+  background: #FFFFFF !important;
+  box-shadow: 0 8px 24px rgba(30, 25, 20, 0.06) !important;
+  border-color: var(--border-gold) !important;
+}
+
+body.light-mode .admin-modal-card {
+  background: #FFFFFF !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 25px 60px rgba(30, 25, 20, 0.15) !important;
+}
+
+body.light-mode .admin-dashboard input,
+body.light-mode .admin-dashboard select,
+body.light-mode .admin-dashboard textarea {
+  background: #FFFFFF !important;
+  color: var(--text-primary) !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+body.light-mode .admin-dashboard input:focus,
+body.light-mode .admin-dashboard select:focus,
+body.light-mode .admin-dashboard textarea:focus {
+  background: #FFFFFF !important;
+  border-color: var(--gold-500) !important;
+  box-shadow: 0 0 12px rgba(196, 152, 38, 0.25) !important;
+}
+
+body.light-mode .admin-dashboard table {
+  background: #FFFFFF !important;
+}
+
+body.light-mode .admin-dashboard thead tr {
+  background: #F3EFEA !important;
+}
+
+body.light-mode .admin-dashboard tbody tr:hover {
+  background: #FAF7F2 !important;
+}
+
+/* ==========================================================================
+   LUXURIOUS COLORFUL WEBSITE BACKGROUND SYSTEM
+   Jewel-Tone Radiance & Seamless Storefront Page Blending
+   ========================================================================== */
+
+/* Consistent Background Flow Across All Storefront Pages */
+.homepage-brand-experience,
+.shop-page,
+.product-detail-page,
+.cart-page,
+.about-page,
+.contact-page,
+.checkout-page {
+  background: transparent !important;
+}
+
+/* Semi-Transparent Section Overlays - Revealing the Jewel-Tone Mesh */
+.luxury-hero {
+  background: radial-gradient(ellipse at 50% 35%, rgba(24, 21, 34, 0.58) 0%, rgba(12, 12, 18, 0.76) 60%, rgba(7, 6, 13, 0.86) 100%) !important;
+}
+body.light-mode .luxury-hero {
+  background: radial-gradient(ellipse at 50% 35%, rgba(255, 255, 255, 0.65) 0%, rgba(245, 240, 234, 0.78) 60%, rgba(250, 248, 245, 0.88) 100%) !important;
+}
+
+.home-brand-heritage {
+  background: rgba(8, 7, 14, 0.62) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+body.light-mode .home-brand-heritage {
+  background: rgba(245, 240, 235, 0.72) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.heritage-card {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+body.light-mode .heritage-card {
+  background: rgba(255, 255, 255, 0.82) !important;
+  box-shadow: 0 10px 30px rgba(30, 25, 20, 0.07) !important;
+}
+
+.experience-section {
+  background: rgba(10, 9, 16, 0.60) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+body.light-mode .experience-section {
+  background: rgba(250, 248, 245, 0.68) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.brand-statement-section {
+  background: rgba(7, 6, 12, 0.68) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+body.light-mode .brand-statement-section {
+  background: rgba(243, 239, 234, 0.72) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.home-shop-cta {
+  background: radial-gradient(ellipse at 50% 50%, rgba(21, 19, 30, 0.68) 0%, rgba(8, 8, 12, 0.84) 75%) !important;
+}
+body.light-mode .home-shop-cta {
+  background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.65) 0%, rgba(245, 240, 234, 0.82) 75%) !important;
+}
+
+.about-hero-section {
+  background: radial-gradient(ellipse at 50% 20%, rgba(28, 26, 38, 0.65) 0%, rgba(12, 12, 16, 0.80) 70%, rgba(7, 7, 12, 0.90) 100%) !important;
+}
+body.light-mode .about-hero-section {
+  background: radial-gradient(ellipse at 50% 20%, rgba(255, 255, 255, 0.72) 0%, rgba(245, 240, 234, 0.85) 70%, rgba(250, 248, 245, 0.92) 100%) !important;
+}
+
+.luxe-section {
+  background: transparent !important;
+}
+
+/* Glassmorphism Depth for Product Cards */
+.product-card {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Footer Luxury Backdrop Integration */
+.main-footer {
+  background: rgba(8, 7, 14, 0.78) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+body.light-mode .main-footer {
+  background: rgba(243, 239, 234, 0.85) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Luxury Logo Display Protection */
+.luxury-logo-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+
+
+
 
 

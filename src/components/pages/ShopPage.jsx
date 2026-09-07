@@ -12,6 +12,7 @@ import { WhatsAppIcon } from '../common/SocialIcons';
 import { useProducts } from '../../context/ProductContext';
 import { useCart } from '../../context/CartContext';
 import { useToast } from '../common/Toast';
+import { useWhatsAppOrder } from '../../context/WhatsAppOrderContext';
 import { getWhatsAppProductOrderUrl, OFFICIAL_DISPLAY_PHONE } from '../../utils/whatsapp';
 import { initialProducts } from '../../data/products';
 
@@ -20,6 +21,7 @@ export default function ShopPage({ onOpenQuickView }) {
   const { products: contextProducts, categories, reduceStock } = useProducts();
   const { formatPrice, addToCart } = useCart();
   const { addToast } = useToast();
+  const { openWhatsAppOrder } = useWhatsAppOrder();
 
   const [selectedCategory, setSelectedCategory] = useState('all');
 
@@ -43,7 +45,7 @@ export default function ShopPage({ onOpenQuickView }) {
   };
 
   return (
-    <div className="shop-page" style={{ padding: '3.5rem 0 6rem', background: '#08080C', minHeight: '85vh' }}>
+    <div className="shop-page" style={{ padding: '3.5rem 0 6rem', background: 'var(--bg-black)', minHeight: '85vh' }}>
       <div className="luxe-container">
         {/* Clean Luxury Title */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
@@ -106,13 +108,12 @@ export default function ShopPage({ onOpenQuickView }) {
                 key={product.id} 
                 className="product-card"
                 style={{
-                  background: 'linear-gradient(180deg, #13131A 0%, #0A0A0E 100%)',
+                  background: 'var(--bg-card)',
                   border: '1px solid var(--border-gold)',
                   borderRadius: 'var(--radius-xs)',
                   overflow: 'hidden',
                   display: 'flex',
                   flexDirection: 'column',
-                  boxShadow: '0 15px 35px rgba(0,0,0,0.65)',
                   position: 'relative'
                 }}
               >
@@ -120,7 +121,7 @@ export default function ShopPage({ onOpenQuickView }) {
                 <div 
                   className="product-card-image-wrap"
                   onClick={() => navigate(`/product/${product.id}`)}
-                  style={{ cursor: 'pointer', aspectRatio: '4/5', background: '#08080A', overflow: 'hidden', position: 'relative' }}
+                  style={{ cursor: 'pointer', aspectRatio: '4/5', background: 'var(--bg-deep)', overflow: 'hidden', position: 'relative' }}
                 >
                   <img 
                     src={product.image} 
@@ -132,7 +133,7 @@ export default function ShopPage({ onOpenQuickView }) {
                   <div style={{ position: 'absolute', top: '12px', left: '12px', zIndex: 2, display: 'flex', flexDirection: 'column', gap: '5px' }}>
                     <span 
                       style={{
-                        background: 'rgba(10, 10, 14, 0.85)',
+                        background: 'var(--bg-glass-heavy)',
                         border: '1px solid var(--border-gold)',
                         color: 'var(--gold-300)',
                         fontSize: '0.68rem',
@@ -234,11 +235,13 @@ export default function ShopPage({ onOpenQuickView }) {
                       {!isOutOfStock ? (
                         <button
                           onClick={() => {
-                            if (reduceStock) {
-                              reduceStock([{ id: product.id, quantity: 1 }]);
-                            }
-                            const url = getWhatsAppProductOrderUrl(product, product.colors?.[0] || null, product.sizes?.[0] || 'Classic Baguette (28cm)', 1);
-                            window.open(url, '_blank', 'noopener,noreferrer');
+                            openWhatsAppOrder({
+                              bagName: product.name,
+                              quantity: 1,
+                              bagPrice: product.priceKes,
+                              totalPrice: product.priceKes,
+                              image: product.image
+                            });
                           }}
                           style={{
                             width: '100%',

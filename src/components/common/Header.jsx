@@ -12,6 +12,7 @@ import {
 import Logo from './Logo';
 import { InstagramIcon, WhatsAppIcon } from './SocialIcons';
 import { useCart } from '../../context/CartContext';
+import { useTheme } from '../../context/ThemeContext';
 import { 
   getWhatsAppInquiryUrl, 
   OFFICIAL_DISPLAY_PHONE,
@@ -22,7 +23,8 @@ import {
 export default function Header({ onOpenSearch }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { totalItemCount, currency, toggleCurrency } = useCart();
+  const { totalItemCount } = useCart();
+  const { isDarkMode, toggleTheme } = useTheme();
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -183,6 +185,21 @@ export default function Header({ onOpenSearch }) {
                 <WhatsAppIcon size={18} color="var(--gold-300)" />
               </a>
 
+              {/* Light Mode / Dark Mode Toggle Button */}
+              <button 
+                className="theme-toggle-btn" 
+                onClick={toggleTheme}
+                title={isDarkMode ? "Switch to Light Mode (☀️)" : "Switch to Dark Mode (🌙)"}
+                aria-label={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                id="header-theme-toggle"
+              >
+                {isDarkMode ? (
+                  <span style={{ fontSize: '1.05rem', lineHeight: 1 }} role="img" aria-label="Sun">☀️</span>
+                ) : (
+                  <span style={{ fontSize: '1.05rem', lineHeight: 1 }} role="img" aria-label="Moon">🌙</span>
+                )}
+              </button>
+
               {/* Search Modal Trigger */}
               <button 
                 className="header-icon-btn" 
@@ -192,6 +209,8 @@ export default function Header({ onOpenSearch }) {
               >
                 <Search size={19} />
               </button>
+
+
 
               {/* Shopping Bag Trigger -> Navigates to /cart */}
               <Link
@@ -236,12 +255,12 @@ export default function Header({ onOpenSearch }) {
               width: '320px',
               maxWidth: '85vw',
               height: '100%',
-              background: 'linear-gradient(175deg, #151420 0%, #09090D 100%)',
+              background: isDarkMode ? 'linear-gradient(175deg, #151420 0%, #09090D 100%)' : 'linear-gradient(175deg, #FAF8F5 0%, #F0EBE3 100%)',
               borderRight: '1px solid var(--border-gold)',
               padding: '2rem 1.5rem',
               display: 'flex',
               flexDirection: 'column',
-              boxShadow: '10px 0 40px rgba(0,0,0,0.85)',
+              boxShadow: isDarkMode ? '10px 0 40px rgba(0,0,0,0.85)' : '10px 0 40px rgba(0,0,0,0.15)',
               overflowY: 'auto'
             }}
             onClick={(e) => e.stopPropagation()}
@@ -258,8 +277,34 @@ export default function Header({ onOpenSearch }) {
               </button>
             </div>
 
+            {/* Mobile Drawer Theme Switcher Row */}
+            <div style={{ marginTop: '1.25rem' }}>
+              <button
+                className="mobile-theme-toggle-row"
+                onClick={toggleTheme}
+                title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                aria-label="Toggle Light/Dark Mode"
+                style={{
+                  color: 'var(--text-primary)',
+                  fontFamily: 'var(--font-serif)',
+                  fontSize: '0.86rem',
+                  fontWeight: '600',
+                  border: '1px solid var(--border-gold)',
+                  background: isDarkMode ? 'rgba(212, 175, 55, 0.1)' : 'rgba(196, 152, 38, 0.12)'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontSize: '1rem' }}>{isDarkMode ? '☀️' : '🌙'}</span>
+                  <span>{isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}</span>
+                </div>
+                <span style={{ fontSize: '0.72rem', color: 'var(--gold-400)', fontWeight: '800', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+                  {isDarkMode ? 'Dark' : 'Light'}
+                </span>
+              </button>
+            </div>
+
             {/* Navigation Links */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1.75rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1.25rem' }}>
               {navItems.map((item) => {
                 const isActive = location.pathname === item.path;
                 return (
@@ -297,6 +342,8 @@ export default function Header({ onOpenSearch }) {
 
             {/* Bottom Drawer Actions */}
             <div style={{ marginTop: 'auto', paddingTop: '1.75rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+
+
               {/* WhatsApp Mobile Link */}
               <a
                 href={getWhatsAppInquiryUrl()}
@@ -350,7 +397,7 @@ export default function Header({ onOpenSearch }) {
               </a>
 
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.5rem', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                <span>Nairobi Atelier</span>
+                <span>Online Nairobi • Countrywide Delivery</span>
                 <div
                   style={{
                     background: 'rgba(212, 175, 55, 0.15)',

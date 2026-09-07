@@ -24,7 +24,7 @@ export default function Footer() {
     <footer 
       className="main-footer" 
       style={{ 
-        background: '#040406', 
+        background: 'var(--bg-black)', 
         borderTop: '1px solid rgba(212, 175, 55, 0.25)', 
         paddingTop: '5rem', 
         paddingBottom: '3.5rem',
@@ -258,7 +258,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Nairobi Atelier Showroom */}
+          {/* Location & Delivery */}
           <div>
             <h4 
               style={{ 
@@ -270,12 +270,12 @@ export default function Footer() {
                 textTransform: 'uppercase' 
               }}
             >
-              Nairobi Atelier Showroom
+              Location & Delivery
             </h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', fontSize: '0.86rem', color: 'var(--text-secondary)' }}>
               <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
                 <MapPin size={16} color="var(--gold-400)" style={{ flexShrink: 0, marginTop: '3px' }} />
-                <span>Delta Corner Tower, Westlands, Nairobi, Kenya</span>
+                <span>Web-based online Nairobi and delivery is done country wide</span>
               </div>
               <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                 <Phone size={16} color="var(--gold-400)" style={{ flexShrink: 0 }} />
@@ -342,8 +342,8 @@ export default function Footer() {
             color: 'var(--text-muted)' 
           }}
         >
-          <div>
-            © {new Date().getFullYear()} LUXE NIA COLLECTION. All Rights Reserved. Handcrafted in Kenya.
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <span>© {new Date().getFullYear()} LUXE NIA COLLECTION. All Rights Reserved.</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--gold-400)' }}>
             <ShieldCheck size={16} />

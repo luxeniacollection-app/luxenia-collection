@@ -3,8 +3,10 @@ import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-route
 import { ProductProvider } from './context/ProductContext';
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
-import { AdminAuthProvider } from './context/AdminAuthContext';
+import { AdminAuthProvider, useAdminAuth } from './context/AdminAuthContext';
 import { ToastProvider } from './components/common/Toast';
+import { WhatsAppOrderProvider } from './context/WhatsAppOrderContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 // Common Components (Customer Storefront)
 import Header from './components/common/Header';
@@ -14,7 +16,7 @@ import QuickViewModal from './components/common/QuickViewModal';
 import SearchModal from './components/common/SearchModal';
 import WhatsAppConcierge from './components/common/WhatsAppConcierge';
 
-// Public Pages (Customer Storefront)
+// Public Pages (Customer Storefront: Home, Shop, Cart, About, Contact)
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import About from './pages/About';
@@ -22,7 +24,7 @@ import Contact from './pages/Contact';
 import CartPage from './components/pages/CartPage';
 import ProductDetailPage from './components/pages/ProductDetailPage';
 
-// Private Admin / CEO Components
+// Private CEO / Admin Components
 import AdminLoginPage from './components/admin/AdminLoginPage';
 import AdminDashboard from './components/admin/AdminDashboard';
 import AdminProtectedRoute from './components/admin/AdminProtectedRoute';
@@ -42,6 +44,7 @@ function AppContent() {
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const location = useLocation();
+  const { isAuthenticated } = useAdminAuth();
 
   const isAdminRoute = location.pathname.toLowerCase().startsWith('/admin') || location.pathname.toLowerCase().startsWith('/ceo');
 
@@ -50,23 +53,25 @@ function AppContent() {
   // =========================================================================
   if (isAdminRoute) {
     return (
-      <div className="admin-suite-app" style={{ minHeight: '100vh', background: '#08080C' }}>
+      <div className="admin-suite-app" style={{ minHeight: '100vh', background: 'var(--bg-black)' }}>
         <ScrollToTop />
         <Routes>
-          {/* Private Admin Login */}
-          <Route path="/admin-login" element={<AdminLoginPage />} />
-          <Route path="/admin/login" element={<Navigate to="/admin-login" replace />} />
-          <Route path="/ceo-login" element={<AdminLoginPage />} />
-
-          {/* Protected Admin Dashboard Routes */}
+          {/* Admin Home: Login if not authenticated, Dashboard if authenticated */}
           <Route 
             path="/admin" 
             element={
-              <AdminProtectedRoute>
+              isAuthenticated ? (
                 <AdminDashboard initialTab="dashboard" />
-              </AdminProtectedRoute>
+              ) : (
+                <AdminLoginPage />
+              )
             } 
           />
+          <Route path="/admin/login" element={<Navigate to="/admin" replace />} />
+          <Route path="/admin-login" element={<AdminLoginPage />} />
+          <Route path="/ceo-login" element={<Navigate to="/admin" replace />} />
+
+          {/* Protected Admin Dashboard Routes */}
           <Route 
             path="/admin/dashboard" 
             element={
@@ -128,17 +133,11 @@ function AppContent() {
           <Route path="/ceo/stock" element={<Navigate to="/admin/stock" replace />} />
           <Route path="/ceo/orders" element={<Navigate to="/admin/orders" replace />} />
           <Route path="/ceo/settings" element={<Navigate to="/admin/settings" replace />} />
-          <Route path="/ceo/*" element={<Navigate to="/admin" replace />} />
+          <Route path="/ceo/*" element={<Navigate to="/admin/dashboard" replace />} />
 
-          {/* Admin Fallback */}
-          <Route 
-            path="/admin/*" 
-            element={
-              <AdminProtectedRoute>
-                <AdminDashboard />
-              </AdminProtectedRoute>
-            } 
-          />
+          {/* Fallback for other /admin paths */}
+          <Route path="/admin/*" element={<Navigate to="/admin/dashboard" replace />} />
+          <Route path="*" element={<Navigate to="/admin" replace />} />
         </Routes>
       </div>
     );
@@ -179,6 +178,10 @@ function AppContent() {
             element={<Contact />} 
           />
           <Route 
+            path="/product/:id" 
+            element={<ProductDetailPage />} 
+          />
+          <Route 
             path="/checkout" 
             element={<Navigate to="/cart" replace />} 
           />
@@ -187,8 +190,8 @@ function AppContent() {
             element={<Navigate to="/shop" replace />} 
           />
           <Route 
-            path="/product/:id" 
-            element={<ProductDetailPage />} 
+            path="/account" 
+            element={<Navigate to="/" replace />} 
           />
           <Route 
             path="*" 
@@ -202,6 +205,8 @@ function AppContent() {
 
       {/* Slide-out Cart Drawer Preview */}
       <CartDrawer />
+
+
 
       {/* Global Quick View Modal */}
       <QuickViewModal
@@ -224,18 +229,22 @@ function AppContent() {
 
 export default function App() {
   return (
-    <ToastProvider>
-      <AdminAuthProvider>
-        <ProductProvider>
-          <CartProvider>
-            <WishlistProvider>
-              <BrowserRouter>
-                <AppContent />
-              </BrowserRouter>
-            </WishlistProvider>
-          </CartProvider>
-        </ProductProvider>
-      </AdminAuthProvider>
-    </ToastProvider>
+    <ThemeProvider>
+      <ToastProvider>
+        <AdminAuthProvider>
+          <ProductProvider>
+            <CartProvider>
+              <WishlistProvider>
+                <WhatsAppOrderProvider>
+                  <BrowserRouter>
+                    <AppContent />
+                  </BrowserRouter>
+                </WhatsAppOrderProvider>
+              </WishlistProvider>
+            </CartProvider>
+          </ProductProvider>
+        </AdminAuthProvider>
+      </ToastProvider>
+    </ThemeProvider>
   );
 }

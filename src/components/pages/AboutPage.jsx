@@ -16,6 +16,7 @@ export default function AboutPage() {
     <div className="about-page">
       {/* Editorial Hero Header */}
       <section 
+        className="about-hero-section"
         style={{
           padding: '6rem 0 4.5rem',
           background: 'radial-gradient(ellipse at 50% 20%, #1c1a26 0%, #0c0c10 70%, #070709 100%)',
@@ -54,7 +55,7 @@ export default function AboutPage() {
       </section>
 
       {/* Brand Values & Craftsmanship */}
-      <section className="luxe-section" style={{ background: '#08080C' }}>
+      <section className="luxe-section" style={{ background: 'var(--bg-black)' }}>
         <div className="luxe-container">
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center', marginBottom: '5rem' }}>
             <div>
@@ -73,8 +74,9 @@ export default function AboutPage() {
             </div>
 
             <div 
+              className="about-craft-card"
               style={{
-                background: 'linear-gradient(135deg, #181822 0%, #0E0E14 100%)',
+                background: 'var(--bg-card)',
                 border: '1px solid var(--border-gold)',
                 borderRadius: 'var(--radius-sm)',
                 padding: '2.75rem 2.25rem',
@@ -123,6 +125,7 @@ export default function AboutPage() {
 
           {/* CTA Banner */}
           <div 
+            className="about-cta-banner"
             style={{
               background: 'radial-gradient(ellipse at 50% 50%, #1a1624 0%, #0c0c10 100%)',
               border: '1px solid var(--border-gold)',

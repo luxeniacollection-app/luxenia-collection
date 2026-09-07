@@ -34,12 +34,23 @@ export default function CartPage() {
     updateQuantity,
     removeFromCart,
     clearCart,
-    formatPrice
+    formatPrice,
+    saveConfirmedOrder
   } = useCart();
 
   const { addToast } = useToast();
   const [inputPromo, setInputPromo] = useState('');
   const [promoError, setPromoError] = useState('');
+
+  // Simple Customer Name State for WhatsApp Ordering
+  const [customerName, setCustomerName] = useState(() => {
+    try {
+      return localStorage.getItem('luxenia_customer_name') || '';
+    } catch (e) {
+      return '';
+    }
+  });
+  const [nameError, setNameError] = useState('');
 
   // PRODUCT TOTAL = FINAL TOTAL (ZERO DELIVERY FEE)
   const grandTotalKes = Math.max(0, subtotalKes - discountAmountKes);
@@ -58,20 +69,24 @@ export default function CartPage() {
     }
   };
 
-  const handleOrderOnWhatsApp = () => {
-    if (cart.length === 0) {
-      addToast('Your shopping bag is empty.', 'info');
+  const handleContinueToWhatsApp = (e) => {
+    if (e) e.preventDefault();
+    setNameError('');
+    const cleanName = customerName.trim();
+    if (!cleanName) {
+      setNameError('Please enter your name to proceed.');
       return;
     }
-    if (reduceStock) {
-      reduceStock(cart);
-    }
-    const url = getWhatsAppCartOrderUrl(cart, grandTotalKes);
+    try {
+      localStorage.setItem('luxenia_customer_name', cleanName);
+    } catch (e) {}
+
+    const url = getWhatsAppCartOrderUrl(cart, grandTotalKes, cleanName);
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <div className="cart-page" style={{ padding: '3.5rem 0 6rem', background: '#08080C', minHeight: '80vh' }}>
+    <div className="cart-page" style={{ padding: '3.5rem 0 6rem', background: 'var(--bg-black)', minHeight: '80vh' }}>
       <div className="luxe-container">
         {/* Header Breadcrumb */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem' }}>
@@ -273,6 +288,7 @@ export default function CartPage() {
                 Order Summary
               </h3>
 
+
               {/* Promo Code Box */}
               <div style={{ marginBottom: '1.5rem' }}>
                 {promoCode ? (
@@ -357,41 +373,103 @@ export default function CartPage() {
                 </span>
               </div>
 
-              {/* PRIMARY ACTION: ORDER ON WHATSAPP */}
-              <button
-                onClick={handleOrderOnWhatsApp}
+              {/* WHATSAPP ORDER FORM (ASK ONLY FOR CUSTOMER NAME) */}
+              <form 
+                onSubmit={handleContinueToWhatsApp}
                 style={{
-                  width: '100%',
-                  padding: '1.15rem 1.5rem',
-                  fontSize: '0.95rem',
-                  fontWeight: '800',
-                  letterSpacing: '0.12em',
-                  background: 'linear-gradient(135deg, #1b3824 0%, #128C7E 50%, #25D366 100%)',
-                  border: '1px solid #25D366',
+                  background: 'rgba(255,255,255,0.02)',
+                  border: '1px solid var(--border-gold)',
                   borderRadius: 'var(--radius-xs)',
-                  color: '#fff',
-                  cursor: 'pointer',
+                  padding: '1.35rem',
+                  marginBottom: '1.5rem',
                   display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '10px',
-                  boxShadow: '0 8px 30px rgba(37,211,102,0.4), 0 0 15px rgba(212,175,55,0.2)',
-                  transition: 'all 0.3s ease',
-                  marginBottom: '1rem'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 12px 35px rgba(37,211,102,0.5), 0 0 20px rgba(212,175,55,0.3)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 8px 30px rgba(37,211,102,0.4), 0 0 15px rgba(212,175,55,0.2)';
+                  flexDirection: 'column',
+                  gap: '12px'
                 }}
               >
-                <WhatsAppIcon size={20} color="#fff" />
-                <span>ORDER ON WHATSAPP</span>
-                <ExternalLink size={15} />
-              </button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <WhatsAppIcon size={16} color="#25D366" />
+                  <span style={{ fontSize: '0.74rem', textTransform: 'uppercase', letterSpacing: '0.12em', color: '#25D366', fontWeight: '800' }}>
+                    DIRECT WHATSAPP ORDER
+                  </span>
+                </div>
+
+                <div>
+                  <label 
+                    htmlFor="cart-customer-name" 
+                    style={{ 
+                      display: 'block', 
+                      fontSize: '0.82rem', 
+                      fontWeight: '700', 
+                      color: 'var(--gold-300)', 
+                      marginBottom: '6px',
+                      letterSpacing: '0.04em'
+                    }}
+                  >
+                    Your Name *
+                  </label>
+                  <input
+                    id="cart-customer-name"
+                    type="text"
+                    required
+                    placeholder="e.g. Jane"
+                    value={customerName}
+                    onChange={(e) => {
+                      setCustomerName(e.target.value);
+                      if (nameError) setNameError('');
+                    }}
+                    className="form-input"
+                    style={{ 
+                      width: '100%', 
+                      height: '46px',
+                      padding: '0 1rem', 
+                      fontSize: '0.92rem',
+                      borderColor: nameError ? '#EF4444' : undefined
+                    }}
+                  />
+                  {nameError && (
+                    <span style={{ color: '#EF4444', fontSize: '0.74rem', marginTop: '4px', display: 'block' }}>
+                      {nameError}
+                    </span>
+                  )}
+                </div>
+
+                {/* PRIMARY ACTION: CONTINUE TO WHATSAPP */}
+                <button
+                  type="submit"
+                  style={{
+                    width: '100%',
+                    padding: '1.1rem 1.5rem',
+                    fontSize: '0.92rem',
+                    fontWeight: '800',
+                    letterSpacing: '0.08em',
+                    background: 'linear-gradient(135deg, #1b3824 0%, #128C7E 50%, #25D366 100%)',
+                    border: '1px solid #25D366',
+                    borderRadius: 'var(--radius-xs)',
+                    color: '#fff',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '10px',
+                    boxShadow: '0 8px 30px rgba(37,211,102,0.4), 0 0 15px rgba(212,175,55,0.2)',
+                    transition: 'all 0.3s ease',
+                    marginTop: '0.25rem'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 12px 35px rgba(37,211,102,0.5), 0 0 20px rgba(212,175,55,0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 8px 30px rgba(37,211,102,0.4), 0 0 15px rgba(212,175,55,0.2)';
+                  }}
+                >
+                  <WhatsAppIcon size={20} color="#fff" />
+                  <span>CONTINUE TO WHATSAPP</span>
+                  <ExternalLink size={15} />
+                </button>
+              </form>
 
               {/* Order Flow Guarantee Notice */}
               <div 

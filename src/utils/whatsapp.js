@@ -18,33 +18,74 @@ export function getWhatsAppInquiryUrl(customMessage = DEFAULT_WHATSAPP_MESSAGE) 
 }
 
 /**
- * Generate a pre-filled WhatsApp link for direct single product ordering
+ * Format order message with Customer Name, Bag Name, Quantity, Bag Price, and Total Price
+ * Example: "Hello LUXE NIA, my name is Jane. I would like to order the Black Clutch Bag, quantity 1, at KSh 5,800."
  */
-export function getWhatsAppProductOrderUrl(product, selectedColor, selectedSize, quantity = 1) {
-  const colorName = typeof selectedColor === 'object' ? selectedColor?.name : (selectedColor || 'Noir Black');
-  const priceFormatted = Number(product.priceKes || 5800).toLocaleString();
-  
-  const text = [
-    `Hello LUXE NIA ✨`,
-    ``,
-    `I would like to order:`,
-    `👜 *Product:* ${product.name}${colorName ? ` (${colorName})` : ''}`,
-    `💰 *Price:* KSh ${priceFormatted}`,
-    `🔢 *Quantity:* ${quantity}`,
-    ``,
-    `Please let me know how we can complete this order, payment, and delivery.`
-  ].join('\n');
+export function formatWhatsAppOrderMessage({
+  customerName,
+  bagName,
+  quantity = 1,
+  bagPrice,
+  totalPrice
+}) {
+  const name = (customerName || '').trim() || 'Jane';
+  const qty = Number(quantity) || 1;
+  const singlePrice = Number(bagPrice) || 5800;
+  const total = totalPrice !== undefined && totalPrice !== null
+    ? Number(totalPrice)
+    : singlePrice * qty;
 
-  return `https://wa.me/${OFFICIAL_WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`;
+  const formattedBagPrice = singlePrice.toLocaleString();
+  const formattedTotalPrice = total.toLocaleString();
+
+  if (qty === 1) {
+    return `Hello LUXE NIA, my name is ${name}. I would like to order the ${bagName}, quantity 1, at KSh ${formattedBagPrice}.`;
+  }
+
+  return `Hello LUXE NIA, my name is ${name}. I would like to order the ${bagName}, quantity ${qty}, at KSh ${formattedBagPrice} each (Total: KSh ${formattedTotalPrice}).`;
 }
 
-// Alias for backward compatibility
-export const getWhatsAppOrderUrl = getWhatsAppProductOrderUrl;
+/**
+ * Generate WhatsApp direct link for a single bag order
+ */
+export function getWhatsAppOrderUrl({
+  customerName,
+  bagName,
+  quantity = 1,
+  bagPrice,
+  totalPrice
+}) {
+  const message = formatWhatsAppOrderMessage({
+    customerName,
+    bagName,
+    quantity,
+    bagPrice,
+    totalPrice
+  });
+  return `https://wa.me/${OFFICIAL_WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+}
 
 /**
- * Generate a pre-filled WhatsApp link for ordering cart/bag items
+ * Legacy single product URL generator (supports backward compatibility)
  */
-export function getWhatsAppCartOrderUrl(cartItems, totalKes) {
+export function getWhatsAppProductOrderUrl(product, selectedColor, selectedSize, quantity = 1, customerName = '') {
+  const bagName = product?.name || 'Luxury Handbag';
+  const bagPrice = product?.priceKes || 5800;
+  return getWhatsAppOrderUrl({
+    customerName,
+    bagName,
+    quantity,
+    bagPrice,
+    totalPrice: bagPrice * quantity
+  });
+}
+
+/**
+ * Generate a pre-filled WhatsApp link for ordering cart items with customer's name
+ */
+export function getWhatsAppCartOrderUrl(cartItems, totalKes, customerName = '') {
+  const name = (customerName || '').trim() || 'Jane';
+
   if (!cartItems || cartItems.length === 0) {
     return getWhatsAppInquiryUrl();
   }
@@ -53,30 +94,29 @@ export function getWhatsAppCartOrderUrl(cartItems, totalKes) {
 
   if (cartItems.length === 1) {
     const item = cartItems[0];
-    return getWhatsAppProductOrderUrl(item, item.selectedColor, item.selectedSize, item.quantity || 1);
+    return getWhatsAppOrderUrl({
+      customerName: name,
+      bagName: item.name,
+      quantity: item.quantity || 1,
+      bagPrice: item.priceKes || 5800,
+      totalPrice: (item.priceKes || 5800) * (item.quantity || 1)
+    });
   }
 
-  const itemsList = cartItems.map((item, idx) => {
-    const colorName = typeof item.selectedColor === 'object' ? item.selectedColor?.name : (item.selectedColor || 'Noir Black');
+  const itemsList = cartItems.map((item) => {
     const itemPrice = Number(item.priceKes || 5800).toLocaleString();
-    return `${idx + 1}. ${item.name} (${colorName}) x${item.quantity || 1} - KSh ${itemPrice}`;
+    const subtotal = ((Number(item.priceKes) || 5800) * (item.quantity || 1)).toLocaleString();
+    return `• ${item.name}, quantity ${item.quantity || 1}, at KSh ${itemPrice} (KSh ${subtotal})`;
   }).join('\n');
 
   const text = [
-    `Hello LUXE NIA ✨`,
-    ``,
-    `I would like to order the following bags:`,
-    ``,
+    `Hello LUXE NIA, my name is ${name}. I would like to order the following bags:`,
     itemsList,
-    ``,
-    `💰 *Total:* KSh ${totalFormatted}`,
-    ``,
-    `Please let me know how we can complete this order, payment, and delivery.`
+    `Total price: KSh ${totalFormatted}.`
   ].join('\n');
 
   return `https://wa.me/${OFFICIAL_WHATSAPP_PHONE}?text=${encodeURIComponent(text)}`;
 }
 
-// Alias for backward compatibility
 export const getWhatsAppCartUrl = getWhatsAppCartOrderUrl;
 export const getWhatsAppPaymentConfirmationUrl = getWhatsAppCartOrderUrl;

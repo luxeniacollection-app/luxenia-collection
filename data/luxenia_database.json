@@ -1,6 +1,100 @@
 {
   "products": [
     {
+      "id": "prod-587049",
+      "name": "The Sovereign Baguette Flap Bag — Ivory Pearl",
+      "subtitle": "Haute Maroquinerie",
+      "category": "handbags",
+      "categoryName": "Designer Bags",
+      "priceKes": 5800,
+      "priceUsd": 45,
+      "sku": "LN-HB-9320",
+      "material": "Supple Full-Grain Calf Leather",
+      "isNew": true,
+      "isFeatured": true,
+      "isLimitedEdition": false,
+      "stock": 1,
+      "status": "active",
+      "rating": 5,
+      "reviewCount": 12,
+      "image": "/images/products/bag-1788555534492.jpg",
+      "gallery": [
+        "/images/products/bag-1788555534492.jpg"
+      ],
+      "shortDescription": "Artisanal luxury leather piece.",
+      "description": "Handcrafted luxury leather handbag from the Luxe Nia Nairobi atelier.",
+      "details": [
+        "Handcrafted from full-grain calf leather in Nairobi",
+        "Solid antique gold-tone luxury hardware",
+        "Includes Luxe Nia dust bag and authenticity certificate"
+      ],
+      "sizes": [
+        "Classic Baguette (28cm)"
+      ],
+      "colors": [
+        {
+          "name": "Noir Black",
+          "hex": "#0A0A0C",
+          "borderHex": "#D4AF37",
+          "image": ""
+        }
+      ],
+      "tags": [
+        "Luxury Bag",
+        "Handcrafted",
+        "Atelier"
+      ],
+      "createdAt": "2026-09-04T20:59:47.049Z",
+      "updatedAt": "2026-09-04T20:59:47.049Z"
+    },
+    {
+      "id": "prod-447096",
+      "name": "The Sovereign Carryall Tote — Glazed Obsidian",
+      "subtitle": "Haute Maroquinerie",
+      "category": "handbags",
+      "categoryName": "Designer Bags",
+      "priceKes": 6800,
+      "priceUsd": 52,
+      "sku": "LN-HB-1330",
+      "material": "Supple Full-Grain Calf Leather",
+      "isNew": true,
+      "isFeatured": true,
+      "isLimitedEdition": false,
+      "stock": 1,
+      "status": "active",
+      "rating": 5,
+      "reviewCount": 12,
+      "image": "/images/products/bag-1788555374730.jpg",
+      "gallery": [
+        "/images/products/bag-1788555374730.jpg"
+      ],
+      "shortDescription": "Artisanal luxury leather piece.",
+      "description": "Handcrafted luxury leather handbag from the Luxe Nia Nairobi atelier.",
+      "details": [
+        "Handcrafted from full-grain calf leather in Nairobi",
+        "Solid antique gold-tone luxury hardware",
+        "Includes Luxe Nia dust bag and authenticity certificate"
+      ],
+      "sizes": [
+        "Classic Baguette (28cm)"
+      ],
+      "colors": [
+        {
+          "name": "Noir Black",
+          "hex": "#0A0A0C",
+          "borderHex": "#D4AF37",
+          "image": ""
+        }
+      ],
+      "tags": [
+        "Luxury Bag",
+        "Handcrafted",
+        "Atelier"
+      ],
+      "createdAt": "2026-09-04T20:57:27.096Z",
+      "updatedAt": "2026-09-04T20:57:27.096Z"
+    },
+    {
       "id": "prod-001",
       "name": "The Sovereign Baguette Flap Bag — Noir Black",
       "subtitle": "Smooth Calfskin with Polished Gold-Tone Twist Clasp",
@@ -12,7 +106,7 @@
       "isNew": true,
       "isFeatured": true,
       "isLimitedEdition": false,
-      "stock": 10,
+      "stock": 1,
       "rating": 5,
       "reviewCount": 28,
       "image": "/images/products/luxe-baguette-noir-black.jpg",
@@ -65,7 +159,7 @@
       "status": "active",
       "material": "Full-Grain Calf Leather",
       "createdAt": "2026-08-27T19:51:38.559Z",
-      "updatedAt": "2026-08-31T18:45:47.362Z"
+      "updatedAt": "2026-09-04T20:43:00.183Z"
     },
     {
       "id": "prod-002",
@@ -79,7 +173,7 @@
       "isNew": true,
       "isFeatured": true,
       "isLimitedEdition": false,
-      "stock": 9,
+      "stock": 2,
       "rating": 4.9,
       "reviewCount": 21,
       "image": "/images/products/luxe-baguette-sahara-brown.jpg",
@@ -132,74 +226,9 @@
       "status": "active",
       "material": "Full-Grain Calf Leather",
       "createdAt": "2026-08-27T19:51:38.559Z",
-      "updatedAt": "2026-08-27T19:51:38.559Z"
-    },
-    {
-      "id": "prod-003",
-      "name": "The Sovereign Baguette Flap Bag — Ivory Pearl",
-      "subtitle": "Luminous Off-White Leather with Polished Gold-Tone Twist Clasp",
-      "category": "handbags",
-      "categoryName": "Designer Bags",
-      "priceKes": 5800,
-      "priceUsd": 45,
-      "sku": "LN-HB-003",
-      "isNew": true,
-      "isFeatured": true,
-      "isLimitedEdition": false,
-      "stock": 8,
-      "rating": 5,
-      "reviewCount": 24,
-      "image": "/images/products/luxe-baguette-ivory-cream.jpg",
-      "gallery": [
-        "/images/products/luxe-baguette-ivory-cream.jpg",
-        "/images/products/luxe-baguette-noir-black.jpg",
-        "/images/products/luxe-baguette-sahara-brown.jpg"
-      ],
-      "shortDescription": "Luminous off-white leather framed with contrast hand-burnished edge lacquer and a signature gold-tone latch.",
-      "description": "Radiant and pure, The Sovereign Baguette in Ivory Pearl brings an ethereal touch of glamour to any occasion. Featuring dark contrast edge dressing that defines its architectural contours, paired with glowing gold-tone hardware.",
-      "details": [
-        "Luminous smooth ivory pearl calf leather",
-        "Hand-burnished contrast dark edge painting",
-        "Solid antique gold-tone latch lock mechanism",
-        "Dimensions: 28cm W x 13cm H x 8cm D",
-        "Detachable and adjustable leather shoulder strap (48cm drop)",
-        "Satin-touch interior with gold monogram embossing",
-        "Includes signature Luxe Nia branded gold-foil dust bag and authenticity card"
-      ],
-      "sizes": [
-        "Classic Baguette (28cm)"
-      ],
-      "colors": [
-        {
-          "name": "Ivory Pearl",
-          "hex": "#F0EBE1",
-          "borderHex": "#D4AF37",
-          "image": "/images/products/luxe-baguette-ivory-cream.jpg"
-        },
-        {
-          "name": "Noir Black",
-          "hex": "#0A0A0C",
-          "borderHex": "#D4AF37",
-          "image": "/images/products/luxe-baguette-noir-black.jpg"
-        },
-        {
-          "name": "Sahara Mocha",
-          "hex": "#542E18",
-          "borderHex": "#D4AF37",
-          "image": "/images/products/luxe-baguette-sahara-brown.jpg"
-        }
-      ],
-      "tags": [
-        "Baguette Bag",
-        "Ivory Pearl",
-        "White Bag",
-        "Gold Hardware",
-        "Editorial"
-      ],
-      "status": "active",
-      "material": "Full-Grain Calf Leather",
-      "createdAt": "2026-08-27T19:51:38.559Z",
-      "updatedAt": "2026-08-27T19:51:38.559Z"
+      "updatedAt": "2026-09-04T22:15:18.470Z",
+      "detailsText": "Supple chocolate brown smooth calf leather\nSolid antique gold-tone latch lock mechanism\nStructured east-west baguette profile with reinforced corners\nDimensions: 28cm W x 13cm H x 8cm D\nDetachable and adjustable leather shoulder strap (48cm drop)\nSatin-touch interior vault with dedicated card slip and zip pocket\nIncludes signature Luxe Nia branded gold-foil dust bag and authenticity card",
+      "sizesText": "Classic Baguette (28cm)"
     },
     {
       "id": "prod-004",
@@ -213,7 +242,7 @@
       "isNew": true,
       "isFeatured": true,
       "isLimitedEdition": false,
-      "stock": 10,
+      "stock": 1,
       "rating": 5,
       "reviewCount": 18,
       "image": "/images/products/luxe-satchel-espresso-mahogany.jpg",
@@ -252,61 +281,7 @@
       "status": "active",
       "material": "Full-Grain Calf Leather",
       "createdAt": "2026-08-27T19:51:38.559Z",
-      "updatedAt": "2026-08-27T19:51:38.559Z"
-    },
-    {
-      "id": "prod-005",
-      "name": "The Sovereign Carryall Tote — Glazed Obsidian",
-      "subtitle": "Glazed Oil-Wax Calfskin Shopper Tote with Dual Flat Shoulder Straps",
-      "category": "handbags",
-      "categoryName": "Designer Bags",
-      "priceKes": 6800,
-      "priceUsd": 52,
-      "sku": "LN-HB-005",
-      "isNew": true,
-      "isFeatured": true,
-      "isLimitedEdition": false,
-      "stock": 9,
-      "rating": 5,
-      "reviewCount": 15,
-      "image": "/images/products/luxe-shopper-glazed-noir.jpg",
-      "gallery": [
-        "/images/products/luxe-shopper-glazed-noir.jpg"
-      ],
-      "shortDescription": "A grand structured shopper tote in glazed oil-wax calfskin leather, designed with comfortable shoulder straps, center seam detailing, and a capacious lined interior.",
-      "description": "The Sovereign Carryall Tote in Glazed Obsidian combines generous capacity with commanding sophistication. Crafted from lustrous oil-wax calf leather that develops a magnificent personal patina over time, this versatile daily tote features long reinforced shoulder handles and an expansive main vault for everyday luxury.",
-      "details": [
-        "Premium glazed oil-wax pull-up calf leather",
-        "Reinforced dual flat shoulder straps with wrapped protection",
-        "Architectural flared tote profile with center panel seam stitching",
-        "Secure top zip closure with custom leather puller and hangtag",
-        "Spacious interior vault with dedicated phone and laptop/document slip",
-        "Dimensions: 38cm W (top) x 28cm H x 14cm D",
-        "Includes signature Luxe Nia branded gold-foil dust bag and authenticity card"
-      ],
-      "sizes": [
-        "Grand Shopper (38cm)"
-      ],
-      "colors": [
-        {
-          "name": "Glazed Obsidian",
-          "hex": "#1C1A20",
-          "borderHex": "#D4AF37",
-          "image": "/images/products/luxe-shopper-glazed-noir.jpg"
-        }
-      ],
-      "tags": [
-        "Tote Bag",
-        "Shopper",
-        "Glazed Leather",
-        "Obsidian",
-        "Carryall",
-        "New Drop"
-      ],
-      "status": "active",
-      "material": "Full-Grain Calf Leather",
-      "createdAt": "2026-08-27T19:51:38.559Z",
-      "updatedAt": "2026-08-31T18:43:58.778Z"
+      "updatedAt": "2026-09-04T20:42:50.614Z"
     }
   ],
   "categories": [
@@ -320,5 +295,389 @@
     }
   ],
   "version": "1.0.0",
-  "lastUpdated": "2026-08-31T18:45:47.400Z"
+  "lastUpdated": "2026-09-04T22:15:18.470Z",
+  "customers": [
+    {
+      "id": "cust-796336",
+      "fullName": "Client VIP",
+      "email": "client.1788394796222@example.com",
+      "phone": "0700000000",
+      "passwordHash": "$2b$10$oawpBfiX8yNiumMQXi7SFO8w/H/P1TZByIrqkBTJASV0rJaHwHpa.",
+      "address": "",
+      "city": "Nairobi",
+      "savedCart": [],
+      "createdAt": "2026-09-03T00:19:56.336Z",
+      "updatedAt": "2026-09-03T00:19:56.336Z"
+    },
+    {
+      "id": "cust-785370",
+      "fullName": "Jane Doe",
+      "email": "jane.doe.1788394785262@example.com",
+      "phone": "0712345678",
+      "passwordHash": "$2b$10$B78x8I5ZjlHr5KjGwsDDUeuISsurdMSRFJ5ykrN4QOt3aTHs4kd2C",
+      "address": "Westlands, Nairobi",
+      "city": "Nairobi",
+      "savedCart": [],
+      "createdAt": "2026-09-03T00:19:45.370Z",
+      "updatedAt": "2026-09-03T00:19:45.370Z"
+    },
+    {
+      "id": "cust-739897",
+      "fullName": "Client VIP",
+      "email": "client.1788393739784@example.com",
+      "phone": "0700000000",
+      "passwordHash": "$2b$10$RBFEgiwUm.Ytg./KgPkJK.zqJ66cwJ2ryQcvtJiq9STeLcJfOUDi.",
+      "address": "",
+      "city": "Nairobi",
+      "savedCart": [],
+      "createdAt": "2026-09-03T00:02:19.897Z",
+      "updatedAt": "2026-09-03T00:02:19.897Z"
+    },
+    {
+      "id": "cust-452924",
+      "fullName": "christine Murugi",
+      "email": "christinemurugi45@gmail.com",
+      "phone": "0795439545",
+      "passwordHash": "$2b$10$ld6tCYWDTviCFil9yV/fZ.e0odkSZUW2X3C/as0FmIZBELrhoqTP.",
+      "address": "Kasarani",
+      "city": "Nairobi",
+      "savedCart": [],
+      "createdAt": "2026-09-02T23:57:32.924Z",
+      "updatedAt": "2026-09-03T00:17:56.660Z"
+    },
+    {
+      "id": "cust-398023",
+      "fullName": "Jane Doe",
+      "email": "jane.doe.1788393397906@example.com",
+      "phone": "0712345678",
+      "passwordHash": "$2b$10$DwXASvRR6pXWr3rJLGC1P.AX5Q9wq212.gLDLcByxu2QusOlcNscy",
+      "address": "Westlands, Nairobi",
+      "city": "Nairobi",
+      "savedCart": [],
+      "createdAt": "2026-09-02T23:56:38.023Z",
+      "updatedAt": "2026-09-02T23:56:38.023Z"
+    },
+    {
+      "id": "cust-527958",
+      "fullName": "Client VIP",
+      "email": "client.1788392527855@example.com",
+      "phone": "0700000000",
+      "passwordHash": "$2b$10$HQ5s359BxH02D8ao16OyguSbXBb3xUPq4t2hWLFGmMXn6SUSduPo6",
+      "address": "",
+      "city": "Nairobi",
+      "savedCart": [],
+      "createdAt": "2026-09-02T23:42:07.958Z",
+      "updatedAt": "2026-09-02T23:42:07.958Z"
+    },
+    {
+      "id": "cust-515675",
+      "fullName": "Jane Doe",
+      "email": "jane.doe.1788392515555@example.com",
+      "phone": "0712345678",
+      "passwordHash": "$2b$10$9EBzt9K44csVEti9PAwdBulZX7Km4afd7uhDcWoqUd55ahGO1DASq",
+      "address": "Westlands, Nairobi",
+      "city": "Nairobi",
+      "savedCart": [],
+      "createdAt": "2026-09-02T23:41:55.675Z",
+      "updatedAt": "2026-09-02T23:41:55.675Z"
+    },
+    {
+      "id": "cust-482180",
+      "fullName": "Jane Doe",
+      "email": "jane.doe.1788392482068@example.com",
+      "phone": "0712345678",
+      "passwordHash": "$2b$10$1x.da.Ct5TpKtxnHvj/oye6qZvyii5LSzUXunOsJt5sqSfeqK4Z4G",
+      "address": "Westlands, Nairobi",
+      "city": "Nairobi",
+      "savedCart": [],
+      "createdAt": "2026-09-02T23:41:22.180Z",
+      "updatedAt": "2026-09-02T23:41:22.180Z"
+    },
+    {
+      "id": "cust-630485",
+      "fullName": "Client VIP",
+      "email": "client.1788391630388@example.com",
+      "phone": "0700000000",
+      "passwordHash": "$2b$10$ogMZ0CKSA94Ni8xl3Dv3Tue1IHOvRII/5XpwWLp9TiPtUefut05lS",
+      "address": "",
+      "city": "Nairobi",
+      "savedCart": [],
+      "createdAt": "2026-09-02T23:27:10.485Z",
+      "updatedAt": "2026-09-02T23:27:10.485Z"
+    },
+    {
+      "id": "cust-603471",
+      "fullName": "Jane Doe",
+      "email": "jane.doe.1788391603351@example.com",
+      "phone": "0712345678",
+      "passwordHash": "$2b$10$odsVdoyemNBHMcm2BrHkyOvB3YqS5kVgV/ORSLae0kma7hWmWyYp6",
+      "address": "Westlands, Nairobi",
+      "city": "Nairobi",
+      "savedCart": [],
+      "createdAt": "2026-09-02T23:26:43.471Z",
+      "updatedAt": "2026-09-02T23:26:43.471Z"
+    },
+    {
+      "id": "cust-519559",
+      "fullName": "Jane Doe",
+      "email": "jane.doe.1788390519414@example.com",
+      "phone": "0712345678",
+      "passwordHash": "$2b$10$I3V31V/aP3rDxc/Kg7GBzeZenHE63Cz28A7mQVJn9SYQ9VX0iiS4G",
+      "address": "Westlands, Nairobi",
+      "city": "Nairobi",
+      "savedCart": [],
+      "createdAt": "2026-09-02T23:08:39.559Z",
+      "updatedAt": "2026-09-02T23:08:39.559Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "LN-ORD-TEST-5485",
+      "date": "2026-09-03T00:19:45.489Z",
+      "items": [
+        {
+          "id": "prod-001",
+          "name": "The Sovereign Baguette Flap Bag — Noir Black",
+          "priceKes": 5800,
+          "quantity": 1,
+          "image": "/images/products/luxe-baguette-noir-black.jpg"
+        }
+      ],
+      "total": 5800,
+      "subtotal": 5800,
+      "status": "New Order",
+      "paymentMethod": "M-Pesa Express",
+      "mpesaReceipt": "MP94785489KE",
+      "mpesaPhone": "",
+      "customerId": null,
+      "customerEmail": "jane.doe.1788394785262@example.com",
+      "customerName": "Jane Doe",
+      "shippingAddress": {
+        "fullName": "Jane Doe",
+        "phone": "0712345678",
+        "city": "Nairobi"
+      },
+      "notes": "",
+      "createdAt": "2026-09-03T00:19:45.489Z"
+    },
+    {
+      "id": "LN-ORD-749739",
+      "date": "2026-09-03T00:19:09.739Z",
+      "items": [
+        {
+          "id": "prod-044520",
+          "name": "Test CEO Handbag",
+          "priceKes": 7500,
+          "quantity": 2
+        }
+      ],
+      "total": 15000,
+      "subtotal": 15000,
+      "status": "Cancelled",
+      "paymentMethod": "M-Pesa Express",
+      "mpesaReceipt": "MP94749739KE",
+      "mpesaPhone": "",
+      "customerId": null,
+      "customerEmail": "vip.client@example.com",
+      "customerName": "VIP Client",
+      "shippingAddress": {
+        "fullName": "VIP Client",
+        "phone": "",
+        "address": "Nairobi Atelier Concierge",
+        "city": "Nairobi"
+      },
+      "notes": "",
+      "createdAt": "2026-09-03T00:19:09.739Z",
+      "updatedAt": "2026-09-03T00:19:09.812Z"
+    },
+    {
+      "id": "LN-ORD-741467",
+      "date": "2026-09-03T00:19:01.477Z",
+      "items": [
+        {
+          "itemKey": "prod-002-Classic Baguette (28cm)-Sahara Mocha",
+          "id": "prod-002",
+          "name": "The Sovereign Baguette Flap Bag — Sahara Mocha",
+          "subtitle": "Rich Chocolate Calfskin with Polished Gold-Tone Twist Clasp",
+          "category": "handbags",
+          "categoryName": "Designer Bags",
+          "priceKes": 5800,
+          "priceUsd": 45,
+          "sku": "LN-HB-002",
+          "selectedSize": "Classic Baguette (28cm)",
+          "selectedColor": {
+            "name": "Sahara Mocha",
+            "hex": "#542E18",
+            "borderHex": "#D4AF37",
+            "image": "/images/products/luxe-baguette-sahara-brown.jpg"
+          },
+          "quantity": 1,
+          "stock": 8,
+          "image": "/images/products/luxe-baguette-sahara-brown.jpg"
+        }
+      ],
+      "total": 5800,
+      "subtotal": 5800,
+      "status": "New Order",
+      "paymentMethod": "M-Pesa / WhatsApp Concierge",
+      "mpesaReceipt": "MP94741471KE",
+      "mpesaPhone": "",
+      "customerId": "cust-452924",
+      "customerEmail": "christinemurugi45@gmail.com",
+      "customerName": "christine Murugi",
+      "shippingAddress": {
+        "fullName": "christine Murugi",
+        "phone": "0795439545",
+        "address": "Kasarani",
+        "city": "Nairobi"
+      },
+      "notes": "",
+      "createdAt": "2026-09-03T00:19:01.477Z"
+    },
+    {
+      "id": "LN-ORD-TEST-8132",
+      "date": "2026-09-02T23:56:38.136Z",
+      "items": [
+        {
+          "id": "prod-001",
+          "name": "The Sovereign Baguette Flap Bag — Noir Black",
+          "priceKes": 5800,
+          "quantity": 1,
+          "image": "/images/products/luxe-baguette-noir-black.jpg"
+        }
+      ],
+      "total": 5800,
+      "subtotal": 5800,
+      "status": "Paid / Confirmed",
+      "paymentMethod": "M-Pesa Express",
+      "mpesaReceipt": "MP93398136KE",
+      "mpesaPhone": "",
+      "customerId": null,
+      "customerEmail": "jane.doe.1788393397906@example.com",
+      "customerName": "Jane Doe",
+      "shippingAddress": {
+        "fullName": "Jane Doe",
+        "phone": "0712345678",
+        "city": "Nairobi"
+      },
+      "notes": "",
+      "createdAt": "2026-09-02T23:56:38.136Z"
+    },
+    {
+      "id": "LN-ORD-TEST-5795",
+      "date": "2026-09-02T23:41:55.795Z",
+      "items": [
+        {
+          "id": "prod-001",
+          "name": "The Sovereign Baguette Flap Bag — Noir Black",
+          "priceKes": 5800,
+          "quantity": 1,
+          "image": "/images/products/luxe-baguette-noir-black.jpg"
+        }
+      ],
+      "total": 5800,
+      "subtotal": 5800,
+      "status": "Paid / Confirmed",
+      "paymentMethod": "M-Pesa Express",
+      "mpesaReceipt": "MP92515795KE",
+      "mpesaPhone": "",
+      "customerId": null,
+      "customerEmail": "jane.doe.1788392515555@example.com",
+      "customerName": "Jane Doe",
+      "shippingAddress": {
+        "fullName": "Jane Doe",
+        "phone": "0712345678",
+        "city": "Nairobi"
+      },
+      "notes": "",
+      "createdAt": "2026-09-02T23:41:55.795Z"
+    },
+    {
+      "id": "LN-ORD-TEST-2298",
+      "date": "2026-09-02T23:41:22.299Z",
+      "items": [
+        {
+          "id": "prod-001",
+          "name": "The Sovereign Baguette Flap Bag — Noir Black",
+          "priceKes": 5800,
+          "quantity": 1,
+          "image": "/images/products/luxe-baguette-noir-black.jpg"
+        }
+      ],
+      "total": 5800,
+      "subtotal": 5800,
+      "status": "Paid / Confirmed",
+      "paymentMethod": "M-Pesa Express",
+      "mpesaReceipt": "MP92482299KE",
+      "mpesaPhone": "",
+      "customerId": null,
+      "customerEmail": "jane.doe.1788392482068@example.com",
+      "customerName": "Jane Doe",
+      "shippingAddress": {
+        "fullName": "Jane Doe",
+        "phone": "0712345678",
+        "city": "Nairobi"
+      },
+      "notes": "",
+      "createdAt": "2026-09-02T23:41:22.299Z"
+    },
+    {
+      "id": "LN-ORD-TEST-3632",
+      "date": "2026-09-02T23:26:43.625Z",
+      "items": [
+        {
+          "id": "prod-001",
+          "name": "The Sovereign Baguette Flap Bag — Noir Black",
+          "priceKes": 5800,
+          "quantity": 1,
+          "image": "/images/products/luxe-baguette-noir-black.jpg"
+        }
+      ],
+      "total": 5800,
+      "subtotal": 5800,
+      "status": "Paid / Confirmed",
+      "paymentMethod": "M-Pesa Express",
+      "mpesaReceipt": "MP91603625KE",
+      "mpesaPhone": "",
+      "customerId": null,
+      "customerEmail": "jane.doe.1788391603351@example.com",
+      "customerName": "Jane Doe",
+      "shippingAddress": {
+        "fullName": "Jane Doe",
+        "phone": "0712345678",
+        "city": "Nairobi"
+      },
+      "notes": "",
+      "createdAt": "2026-09-02T23:26:43.625Z"
+    },
+    {
+      "id": "LN-ORD-TEST-9674",
+      "date": "2026-09-02T23:08:39.677Z",
+      "items": [
+        {
+          "id": "prod-001",
+          "name": "The Sovereign Baguette Flap Bag — Noir Black",
+          "priceKes": 5800,
+          "quantity": 1,
+          "image": "/images/products/luxe-baguette-noir-black.jpg"
+        }
+      ],
+      "total": 5800,
+      "subtotal": 5800,
+      "status": "Paid / Confirmed",
+      "paymentMethod": "M-Pesa Express",
+      "mpesaReceipt": "MP90519677KE",
+      "mpesaPhone": "",
+      "customerId": null,
+      "customerEmail": "jane.doe.1788390519414@example.com",
+      "customerName": "Jane Doe",
+      "shippingAddress": {
+        "fullName": "Jane Doe",
+        "phone": "0712345678",
+        "city": "Nairobi"
+      },
+      "notes": "",
+      "createdAt": "2026-09-02T23:08:39.677Z"
+    }
+  ]
 }

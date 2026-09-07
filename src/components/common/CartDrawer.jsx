@@ -5,6 +5,7 @@ import { WhatsAppIcon } from './SocialIcons';
 import { useCart } from '../../context/CartContext';
 import { useProducts } from '../../context/ProductContext';
 import { useToast } from './Toast';
+import { useWhatsAppOrder } from '../../context/WhatsAppOrderContext';
 import { getWhatsAppCartOrderUrl, OFFICIAL_DISPLAY_PHONE } from '../../utils/whatsapp';
 
 export default function CartDrawer() {
@@ -26,6 +27,7 @@ export default function CartDrawer() {
   } = useCart();
 
   const { addToast } = useToast();
+  const { openWhatsAppOrder } = useWhatsAppOrder();
 
   const [inputPromo, setInputPromo] = useState('');
   const [promoError, setPromoError] = useState('');
@@ -52,11 +54,10 @@ export default function CartDrawer() {
       addToast('Your shopping bag is empty. Explore our collections.', 'gold');
       return;
     }
-    if (reduceStock) {
-      reduceStock(cart);
-    }
-    const url = getWhatsAppCartOrderUrl(cart, grandTotalKes);
-    window.open(url, '_blank', 'noopener,noreferrer');
+    openWhatsAppOrder({
+      items: cart,
+      totalPrice: grandTotalKes
+    });
     closeCart();
   };
 

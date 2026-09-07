@@ -3,8 +3,8 @@
 export const brandInfo = {
   name: 'Luxe Nia Collections',
   tagline: 'Timeless Opulence & Contemporary African Luxury',
-  location: 'Nairobi, Kenya',
-  atelierAddress: 'The Penthouse Suite, Delta Corner Tower, Westlands, Nairobi',
+  location: 'Web-based Online Nairobi',
+  atelierAddress: 'Web-based online Nairobi and delivery is done country wide',
   phone: '+254 795 439 545',
   whatsappPhone: '0795439545',
   email: 'luxeniacollection@gmail.com',

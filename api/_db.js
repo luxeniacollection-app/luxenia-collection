@@ -436,3 +436,227 @@ export async function reduceProductStock(orderItems = []) {
     products
   };
 }
+
+/**
+ * Customer Management Functions
+ */
+export async function getAllCustomers() {
+  const db = readDb();
+  return (db.customers || []).map(c => {
+    const { passwordHash, ...safe } = c;
+    return safe;
+  });
+}
+
+export async function getCustomerByEmail(email) {
+  if (!email) return null;
+  const db = readDb();
+  const cleanEmail = email.toLowerCase().trim();
+  return (db.customers || []).find(c => c.email && c.email.toLowerCase() === cleanEmail) || null;
+}
+
+export async function getCustomerById(id) {
+  if (!id) return null;
+  const db = readDb();
+  return (db.customers || []).find(c => c.id === id) || null;
+}
+
+export async function createCustomer(customerData) {
+  const db = readDb();
+  const customers = db.customers || [];
+  const cleanEmail = customerData.email.toLowerCase().trim();
+
+  if (customers.some(c => c.email && c.email.toLowerCase() === cleanEmail)) {
+    throw new Error('An account with this email address already exists.');
+  }
+
+  const timestamp = Date.now();
+  const newCustomer = {
+    id: `cust-${timestamp.toString().slice(-6)}`,
+    fullName: customerData.fullName?.trim() || 'Valued Client',
+    email: cleanEmail,
+    phone: customerData.phone?.trim() || '',
+    passwordHash: customerData.passwordHash || '',
+    address: customerData.address || '',
+    city: customerData.city || 'Nairobi',
+    savedCart: customerData.savedCart || [],
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
+
+  customers.unshift(newCustomer);
+  db.customers = customers;
+  writeDb(db);
+
+  const { passwordHash, ...safeCustomer } = newCustomer;
+  return safeCustomer;
+}
+
+export async function updateCustomer(id, updates) {
+  const db = readDb();
+  const customers = db.customers || [];
+  const index = customers.findIndex(c => c.id === id || (c.email && c.email.toLowerCase() === id.toLowerCase()));
+  if (index === -1) {
+    throw new Error(`Customer "${id}" not found.`);
+  }
+
+  customers[index] = {
+    ...customers[index],
+    ...updates,
+    updatedAt: new Date().toISOString()
+  };
+
+  db.customers = customers;
+  writeDb(db);
+
+  const { passwordHash, ...safeCustomer } = customers[index];
+  return safeCustomer;
+}
+
+/**
+ * Order Management Functions
+ */
+export async function getAllOrders() {
+  const db = readDb();
+  const orders = db.orders || [];
+  return orders.map(ord => {
+    const rawStatus = (ord.status || 'pending').toLowerCase();
+    let status = 'pending';
+    if (rawStatus.includes('deliver')) status = 'delivered';
+    else if (rawStatus.includes('delay')) status = 'delayed';
+    else status = 'pending';
+
+    const rawPayment = (ord.payment_status || (ord.paymentVerified !== false ? 'paid' : 'unpaid')).toLowerCase();
+    const payment_status = rawPayment === 'unpaid' ? 'unpaid' : 'paid';
+
+    return {
+      ...ord,
+      status,
+      payment_status,
+      customer_name: ord.customer_name || ord.customerName || ord.shippingAddress?.fullName || 'Valued Client',
+      customer_contact: ord.customer_contact || ord.customerContact || ord.customerEmail || ord.mpesaPhone || ord.shippingAddress?.phone || '',
+      created_at: ord.created_at || ord.date || new Date().toISOString()
+    };
+  });
+}
+
+export async function getCustomerOrders(customerEmailOrId) {
+  if (!customerEmailOrId) return [];
+  const db = readDb();
+  const clean = customerEmailOrId.toLowerCase().trim();
+  return (db.orders || []).filter(o => 
+    (o.customerEmail && o.customerEmail.toLowerCase() === clean) ||
+    (o.customerId && o.customerId === customerEmailOrId) ||
+    (o.customer_contact && o.customer_contact.toLowerCase().includes(clean)) ||
+    (o.mpesaPhone && o.mpesaPhone.includes(clean))
+  );
+}
+
+export async function createOrder(orderData) {
+  const db = readDb();
+  const orders = db.orders || [];
+
+  const timestamp = Date.now();
+  const orderId = orderData.id || `LN-ORD-${timestamp.toString().slice(-6)}`;
+
+  // Format order items
+  const items = Array.isArray(orderData.items) ? orderData.items.map(i => ({
+    order_id: orderId,
+    product_id: i.product_id || i.id || i.productId || '',
+    name: i.name || 'Artisanal Piece',
+    quantity: Number(i.quantity || 1),
+    price_at_purchase: Number(i.price_at_purchase || i.priceKes || i.price || 0),
+    image: i.image || '',
+    color: i.color || null,
+    size: i.size || null
+  })) : [];
+
+  const rawStatus = (orderData.status || 'pending').toLowerCase();
+  const status = ['pending', 'delivered', 'delayed'].includes(rawStatus) ? rawStatus : 'pending';
+
+  const rawPaymentStatus = (orderData.payment_status || orderData.paymentStatus || 'paid').toLowerCase();
+  const payment_status = ['paid', 'unpaid'].includes(rawPaymentStatus) ? rawPaymentStatus : 'paid';
+
+  const customer_name = orderData.customer_name || orderData.customerName || orderData.shippingAddress?.fullName || 'Valued Client';
+  const customer_contact = orderData.customer_contact || orderData.customerContact || orderData.customerEmail || orderData.mpesaPhone || orderData.shippingAddress?.phone || '';
+
+  const newOrder = {
+    id: orderId,
+    customer_name,
+    customer_contact,
+    status,
+    payment_status,
+    items,
+    total: Number(orderData.total) || items.reduce((sum, item) => sum + (item.price_at_purchase * item.quantity), 0),
+    created_at: new Date().toISOString(),
+    // Backwards-compatible aliases
+    date: new Date().toISOString(),
+    customerName: customer_name,
+    customerEmail: customer_contact.includes('@') ? customer_contact : '',
+    mpesaPhone: !customer_contact.includes('@') ? customer_contact : (orderData.mpesaPhone || ''),
+    paymentMethod: orderData.paymentMethod || 'M-Pesa / WhatsApp Concierge',
+    delivery_address: orderData.delivery_address || orderData.shippingAddress?.address || 'Nairobi Delivery',
+    shippingAddress: orderData.shippingAddress || {
+      fullName: customer_name,
+      phone: customer_contact,
+      address: orderData.delivery_address || 'Nairobi Delivery',
+      city: orderData.city || 'Nairobi'
+    }
+  };
+
+  orders.unshift(newOrder);
+  db.orders = orders;
+  writeDb(db);
+
+  return newOrder;
+}
+
+export async function updateOrderStatus(orderId, newStatus) {
+  const db = readDb();
+  const orders = db.orders || [];
+  const index = orders.findIndex(o => o.id === orderId);
+  if (index === -1) {
+    throw new Error(`Order "${orderId}" not found.`);
+  }
+
+  const normalized = (newStatus || '').toLowerCase();
+  let validStatus = 'pending';
+  if (normalized.includes('deliver')) validStatus = 'delivered';
+  else if (normalized.includes('delay')) validStatus = 'delayed';
+  else validStatus = 'pending';
+
+  orders[index] = {
+    ...orders[index],
+    status: validStatus,
+    updated_at: new Date().toISOString()
+  };
+
+  db.orders = orders;
+  writeDb(db);
+
+  return orders[index];
+}
+
+export async function updateOrderPaymentStatus(orderId, newPaymentStatus) {
+  const db = readDb();
+  const orders = db.orders || [];
+  const index = orders.findIndex(o => o.id === orderId);
+  if (index === -1) {
+    throw new Error(`Order "${orderId}" not found.`);
+  }
+
+  const normalized = (newPaymentStatus || '').toLowerCase();
+  const validPaymentStatus = normalized === 'unpaid' ? 'unpaid' : 'paid';
+
+  orders[index] = {
+    ...orders[index],
+    payment_status: validPaymentStatus,
+    updated_at: new Date().toISOString()
+  };
+
+  db.orders = orders;
+  writeDb(db);
+
+  return orders[index];
+}
+

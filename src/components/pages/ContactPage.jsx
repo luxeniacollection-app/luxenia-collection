@@ -46,7 +46,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="contact-page" style={{ padding: '3.5rem 0 6rem', background: '#08080C', minHeight: '80vh' }}>
+    <div className="contact-page" style={{ padding: '3.5rem 0 6rem', background: 'var(--bg-black)', minHeight: '80vh' }}>
       <div className="luxe-container">
         {/* Header */}
         <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3.5rem' }}>
@@ -71,6 +71,7 @@ export default function ContactPage() {
             ================================================================= */}
         <section 
           id="find-us"
+          className="find-us-section"
           style={{
             marginBottom: '4.5rem',
             background: 'linear-gradient(180deg, rgba(21, 19, 30, 0.7) 0%, rgba(10, 10, 14, 0.95) 100%)',
@@ -263,6 +264,7 @@ export default function ContactPage() {
 
             {/* Card 3: Nairobi Atelier Showroom */}
             <div 
+              className="contact-showroom-card"
               style={{
                 background: 'linear-gradient(160deg, #161520 0%, #0A0A0E 100%)',
                 border: '1px solid var(--border-gold)',
@@ -293,15 +295,15 @@ export default function ContactPage() {
                     <MapPin size={24} color="#08080C" />
                   </div>
                   <span style={{ fontSize: '0.72rem', background: 'rgba(212,175,55,0.1)', color: 'var(--gold-300)', border: '1px solid var(--border-gold)', padding: '2px 8px', borderRadius: '10px', fontWeight: '700' }}>
-                    Atelier Suite
+                    Online & Countrywide
                   </span>
                 </div>
 
-                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', color: '#fff', marginBottom: '0.4rem' }}>
-                  Nairobi Atelier
+                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', color: 'var(--text-pure-white)', marginBottom: '0.4rem' }}>
+                  Web-based Online Nairobi
                 </h3>
                 <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '1rem' }}>
-                  The Penthouse Suite, Delta Corner Tower, Westlands, Nairobi, Kenya.
+                  Web-based online Nairobi and delivery is done country wide.
                 </p>
 
                 <div style={{ background: 'rgba(0,0,0,0.35)', padding: '0.75rem', borderRadius: 'var(--radius-xs)', marginBottom: '1.5rem', border: '1px solid rgba(255,255,255,0.06)' }}>
@@ -323,10 +325,10 @@ export default function ContactPage() {
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '8px',
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid var(--border-subtle)',
+                  background: 'rgba(212,175,55,0.1)',
+                  border: '1px solid var(--border-gold)',
                   borderRadius: 'var(--radius-xs)',
-                  color: 'var(--text-primary)',
+                  color: 'var(--gold-300)',
                   padding: '0.85rem 1.25rem',
                   fontSize: '0.86rem',
                   fontWeight: '700',
@@ -348,6 +350,7 @@ export default function ContactPage() {
           {/* Left Column: Atelier Overview & Quick WhatsApp */}
           <div>
             <div 
+              className="contact-atelier-card"
               style={{
                 background: 'linear-gradient(145deg, #14131D 0%, #0A0A0E 100%)',
                 border: '1px solid var(--border-gold)',
@@ -367,8 +370,8 @@ export default function ContactPage() {
                 <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
                   <MapPin size={18} color="var(--gold-400)" style={{ flexShrink: 0, marginTop: '2px' }} />
                   <div>
-                    <strong style={{ color: 'var(--text-pure-white)', display: 'block', marginBottom: '2px' }}>Atelier Location</strong>
-                    <span>Delta Corner Tower, Westlands, Nairobi, Kenya</span>
+                    <strong style={{ color: 'var(--text-pure-white)', display: 'block', marginBottom: '2px' }}>Location & Delivery</strong>
+                    <span>Web-based online Nairobi and delivery is done country wide</span>
                   </div>
                 </div>
 

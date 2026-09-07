@@ -22,6 +22,7 @@ import { WhatsAppIcon } from '../common/SocialIcons';
 import { useProducts } from '../../context/ProductContext';
 import { useCart } from '../../context/CartContext';
 import { useToast } from '../common/Toast';
+import { useWhatsAppOrder } from '../../context/WhatsAppOrderContext';
 import { getWhatsAppProductOrderUrl, OFFICIAL_DISPLAY_PHONE } from '../../utils/whatsapp';
 import { initialProducts } from '../../data/products';
 
@@ -31,6 +32,7 @@ export default function ProductDetailPage() {
   const { products: contextProducts, reduceStock } = useProducts();
   const { addToCart, formatPrice } = useCart();
   const { addToast } = useToast();
+  const { openWhatsAppOrder } = useWhatsAppOrder();
 
   const products = (Array.isArray(contextProducts) && contextProducts.length > 0)
     ? contextProducts
@@ -81,17 +83,20 @@ export default function ProductDetailPage() {
       window.open(url, '_blank', 'noopener,noreferrer');
       return;
     }
-    if (reduceStock) {
-      reduceStock([{ id: product.id, quantity }]);
-    }
-    const url = getWhatsAppProductOrderUrl(product, selectedColor, selectedSize, quantity);
-    window.open(url, '_blank', 'noopener,noreferrer');
+    openWhatsAppOrder({
+      bagName: product.name,
+      quantity,
+      bagPrice: product.priceKes,
+      totalPrice: (Number(product.priceKes) || 5800) * quantity,
+      image: activeImage || product.image,
+      color: selectedColor?.name
+    });
   };
 
   const otherBags = products.filter(p => p.id !== product.id);
 
   return (
-    <div className="product-detail-page" style={{ padding: '3rem 0 6rem', background: '#08080B' }}>
+    <div className="product-detail-page" style={{ padding: '3rem 0 6rem', background: 'var(--bg-black)' }}>
       <div className="luxe-container">
         {/* Breadcrumb Navigation */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2.5rem', fontSize: '0.85rem', flexWrap: 'wrap' }}>
@@ -112,7 +117,7 @@ export default function ProductDetailPage() {
               style={{
                 width: '100%',
                 aspectRatio: '4/5',
-                background: '#07070A',
+                background: 'var(--bg-card)',
                 border: '1px solid var(--border-gold)',
                 borderRadius: 'var(--radius-xs)',
                 overflow: 'hidden',
@@ -144,7 +149,7 @@ export default function ProductDetailPage() {
                       borderRadius: 'var(--radius-xs)',
                       overflow: 'hidden',
                       border: (activeImage || product.image) === imgUrl ? '2px solid var(--gold-400)' : '1px solid var(--border-subtle)',
-                      background: '#111',
+                      background: 'var(--bg-card)',
                       cursor: 'pointer',
                       padding: 0,
                       flexShrink: 0,
@@ -164,7 +169,7 @@ export default function ProductDetailPage() {
             <div 
               style={{
                 marginTop: '1.5rem',
-                background: 'rgba(16, 16, 22, 0.8)',
+                background: 'var(--bg-card)',
                 border: '1px solid var(--border-subtle)',
                 borderRadius: 'var(--radius-xs)',
                 padding: '1.25rem',
@@ -379,7 +384,7 @@ export default function ProductDetailPage() {
                     justifyContent: 'center',
                     gap: '10px',
                     padding: '1.15rem 1.5rem',
-                    background: 'rgba(255,255,255,0.05)',
+                    background: 'var(--bg-card)',
                     border: '1px solid var(--border-subtle)',
                     borderRadius: 'var(--radius-xs)',
                     color: 'var(--text-muted)',
