@@ -211,7 +211,7 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
                   }}
                 >
                   <WhatsAppIcon size={17} color="#fff" />
-                  <span>ORDER ON WHATSAPP</span>
+                  <span>BUY ON WHATSAPP</span>
                 </button>
               ) : (
                 <button

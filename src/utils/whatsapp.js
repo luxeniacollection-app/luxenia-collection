@@ -39,10 +39,10 @@ export function formatWhatsAppOrderMessage({
   const formattedTotalPrice = total.toLocaleString();
 
   if (qty === 1) {
-    return `Hello LUXE NIA, my name is ${name}. I would like to order the ${bagName}, quantity 1, at KSh ${formattedBagPrice}.`;
+    return `Hello LUXE NIA, my name is ${name}. I want to buy the ${bagName}, quantity 1, at KSh ${formattedBagPrice}.`;
   }
 
-  return `Hello LUXE NIA, my name is ${name}. I would like to order the ${bagName}, quantity ${qty}, at KSh ${formattedBagPrice} each (Total: KSh ${formattedTotalPrice}).`;
+  return `Hello LUXE NIA, my name is ${name}. I want to buy the ${bagName}, quantity ${qty}, at KSh ${formattedBagPrice} each (Total: KSh ${formattedTotalPrice}).`;
 }
 
 /**
@@ -110,7 +110,7 @@ export function getWhatsAppCartOrderUrl(cartItems, totalKes, customerName = '') 
   }).join('\n');
 
   const text = [
-    `Hello LUXE NIA, my name is ${name}. I would like to order the following bags:`,
+    `Hello LUXE NIA, my name is ${name}. I want to buy the following bags:`,
     itemsList,
     `Total price: KSh ${totalFormatted}.`
   ].join('\n');

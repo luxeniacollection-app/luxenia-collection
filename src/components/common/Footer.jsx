@@ -122,7 +122,7 @@ export default function Footer() {
           </p>
 
           <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.7', maxWidth: '520px', margin: '0 0 2rem' }}>
-            Contemporary African luxury and bespoke leather craftsmanship. Handcrafted with reverence from full-grain calf leather in Nairobi, Kenya.
+            Contemporary African luxury and genuine leather craftsmanship. Handcrafted with reverence from full-grain calf leather in Nairobi, Kenya.
           </p>
 
           {/* Prominent Clickable Action Badges */}

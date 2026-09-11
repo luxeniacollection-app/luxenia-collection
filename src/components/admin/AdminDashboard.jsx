@@ -141,7 +141,7 @@ export default function AdminDashboard({ initialTab }) {
   // Product Form State
   const initialForm = {
     name: '',
-    subtitle: 'Haute Maroquinerie',
+    subtitle: 'Luxury Leather Collection',
     category: 'handbags',
     categoryName: 'Designer Bags',
     priceKes: 5800,

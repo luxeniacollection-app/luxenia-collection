@@ -19,6 +19,7 @@ import {
   OFFICIAL_INSTAGRAM_URL,
   OFFICIAL_INSTAGRAM_HANDLE
 } from '../../utils/whatsapp';
+import MonogramStudioModal from './MonogramStudioModal';
 
 export default function Header({ onOpenSearch }) {
   const location = useLocation();
@@ -28,6 +29,7 @@ export default function Header({ onOpenSearch }) {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMonogramOpen, setIsMonogramOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,6 +87,29 @@ export default function Header({ onOpenSearch }) {
               <span>{OFFICIAL_INSTAGRAM_HANDLE}</span>
             </a>
 
+            {/* Custom Initials Studio Trigger */}
+            <button
+              onClick={() => setIsMonogramOpen(true)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px',
+                background: 'rgba(212, 175, 55, 0.16)',
+                border: '1px solid var(--border-gold)',
+                color: 'var(--gold-300)',
+                padding: '2px 10px',
+                borderRadius: 'var(--radius-full)',
+                fontSize: '0.72rem',
+                fontWeight: '700',
+                letterSpacing: '0.05em',
+                cursor: 'pointer'
+              }}
+              title="Add Custom Initials"
+            >
+              <Sparkles size={11} color="var(--gold-400)" />
+              <span>Custom Initials</span>
+            </button>
+
             {/* Official Currency */}
             <div
               style={{
@@ -124,7 +149,7 @@ export default function Header({ onOpenSearch }) {
 
               {/* Desktop Nav Links */}
               <nav className="desktop-nav">
-                <ul className="nav-links" style={{ display: 'flex', gap: '1.75rem', listStyle: 'none', margin: 0, padding: 0 }}>
+                <ul className="nav-links" style={{ display: 'flex', gap: '1.75rem', listStyle: 'none', margin: 0, padding: 0, alignItems: 'center' }}>
                   {navItems.map((item) => (
                     <li key={item.path}>
                       <NavLink
@@ -146,6 +171,31 @@ export default function Header({ onOpenSearch }) {
                       </NavLink>
                     </li>
                   ))}
+                  <li>
+                    <button
+                      onClick={() => setIsMonogramOpen(true)}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '5px',
+                        fontSize: '0.85rem',
+                        letterSpacing: '0.12em',
+                        fontWeight: '700',
+                        fontFamily: 'var(--font-serif)',
+                        color: 'var(--gold-300)',
+                        padding: '4px 0',
+                        borderBottom: '2px solid transparent',
+                        transition: 'all 0.2s ease'
+                      }}
+                      title="Personalize Handbags with Custom Gold Initials"
+                    >
+                      <Sparkles size={13} color="var(--gold-400)" />
+                      <span>CUSTOM INITIALS</span>
+                    </button>
+                  </li>
                 </ul>
               </nav>
             </div>
@@ -396,6 +446,37 @@ export default function Header({ onOpenSearch }) {
                 <span>Instagram {OFFICIAL_INSTAGRAM_HANDLE}</span>
               </a>
 
+              {/* Custom Initials Mobile Card */}
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsMonogramOpen(true);
+                }}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '0.95rem 1.25rem',
+                  borderRadius: 'var(--radius-xs)',
+                  fontFamily: 'var(--font-serif)',
+                  fontSize: '0.88rem',
+                  fontWeight: '800',
+                  letterSpacing: '0.1em',
+                  color: '#FFFFFF',
+                  border: '1px solid var(--gold-400)',
+                  background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(150, 109, 33, 0.15) 100%)',
+                  cursor: 'pointer',
+                  textAlign: 'left'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Sparkles size={16} color="var(--gold-400)" />
+                  <span>CUSTOM INITIALS</span>
+                </div>
+                <span style={{ fontSize: '0.72rem', color: 'var(--gold-300)' }}>Custom ✦</span>
+              </button>
+
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.5rem', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
                 <span>Online Nairobi • Countrywide Delivery</span>
                 <div
@@ -417,6 +498,12 @@ export default function Header({ onOpenSearch }) {
           </div>
         </div>
       )}
+
+      {/* Global Monogram Studio Modal from Header */}
+      <MonogramStudioModal
+        isOpen={isMonogramOpen}
+        onClose={() => setIsMonogramOpen(false)}
+      />
     </>
   );
 }

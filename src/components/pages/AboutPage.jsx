@@ -30,7 +30,7 @@ export default function AboutPage() {
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginTop: '1.75rem', marginBottom: '1rem' }}>
             <Sparkles size={16} color="var(--gold-400)" />
             <span style={{ fontSize: '0.76rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold-400)', fontWeight: '700' }}>
-              The Maison Philosophy
+              Our Brand Philosophy
             </span>
           </div>
 
@@ -49,7 +49,7 @@ export default function AboutPage() {
               margin: '0 auto'
             }}
           >
-            LUXE NIA was conceived with a clear mission: to craft world-class luxury leather handbags defined by structural refinement, rich full-grain calfskin, and bespoke African sophistication.
+            LUXE NIA was conceived with a clear mission: to craft world-class luxury leather handbags defined by structural refinement, rich full-grain calfskin, and authentic African luxury.
           </p>
         </div>
       </section>

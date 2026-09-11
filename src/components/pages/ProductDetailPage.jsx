@@ -25,6 +25,8 @@ import { useToast } from '../common/Toast';
 import { useWhatsAppOrder } from '../../context/WhatsAppOrderContext';
 import { getWhatsAppProductOrderUrl, OFFICIAL_DISPLAY_PHONE } from '../../utils/whatsapp';
 import { initialProducts } from '../../data/products';
+import MonogramStudioModal from '../common/MonogramStudioModal';
+import AuthenticityCertificateModal from '../common/AuthenticityCertificateModal';
 
 export default function ProductDetailPage() {
   const { id } = useParams();
@@ -45,6 +47,8 @@ export default function ProductDetailPage() {
   const [activeImage, setActiveImage] = useState(product?.image || null);
   const [quantity, setQuantity] = useState(1);
   const [activeAccordion, setActiveAccordion] = useState('details');
+  const [isMonogramOpen, setIsMonogramOpen] = useState(false);
+  const [isCertificateOpen, setIsCertificateOpen] = useState(false);
 
   useEffect(() => {
     if (product) {
@@ -368,7 +372,7 @@ export default function ProductDetailPage() {
                   }}
                 >
                   <WhatsAppIcon size={20} color="#fff" />
-                  <span>ORDER ON WHATSAPP</span>
+                  <span>BUY ON WHATSAPP</span>
                   <ExternalLink size={16} />
                 </button>
               ) : (
@@ -400,8 +404,74 @@ export default function ProductDetailPage() {
                 </button>
               )}
 
-            {/* Information Accordions */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', borderTop: '1px solid var(--border-subtle)', paddingTop: '1.5rem' }}>
+              {/* CUSTOM 24K GOLD FOIL INITIALS TRIGGER */}
+              <div style={{ marginBottom: '1.25rem' }}>
+                <button
+                  onClick={() => setIsMonogramOpen(true)}
+                  style={{
+                    width: '100%',
+                    padding: '0.95rem 1.25rem',
+                    background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.16) 0%, rgba(150, 109, 33, 0.08) 100%)',
+                    border: '1px solid var(--gold-400)',
+                    borderRadius: 'var(--radius-xs)',
+                    color: 'var(--gold-300)',
+                    fontSize: '0.85rem',
+                    fontWeight: '800',
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '10px',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 15px rgba(212,175,55,0.15)',
+                    transition: 'all 0.25s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(212, 175, 55, 0.28) 0%, rgba(150, 109, 33, 0.15) 100%)';
+                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(212,175,55,0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(212, 175, 55, 0.16) 0%, rgba(150, 109, 33, 0.08) 100%)';
+                    e.currentTarget.style.boxShadow = '0 4px 15px rgba(212,175,55,0.15)';
+                  }}
+                >
+                  <Sparkles size={16} color="var(--gold-400)" />
+                  <span>Add Custom Gold Initials</span>
+                  <Crown size={14} color="var(--gold-400)" />
+                </button>
+              </div>
+
+              {/* Information Accordions */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', borderTop: '1px solid var(--border-subtle)', paddingTop: '1.5rem' }}>
+                {/* Certificate Verification Trigger */}
+                <div style={{ marginBottom: '0.75rem' }}>
+                  <button
+                    onClick={() => setIsCertificateOpen(true)}
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem 1rem',
+                      background: 'rgba(255, 255, 255, 0.03)',
+                      border: '1px solid var(--border-subtle)',
+                      borderRadius: 'var(--radius-xs)',
+                      color: 'var(--text-secondary)',
+                      fontSize: '0.78rem',
+                      fontWeight: '700',
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <ShieldCheck size={16} color="var(--gold-400)" />
+                      <span>Inspect Digital Certificate of Authenticity</span>
+                    </div>
+                    <span style={{ color: 'var(--gold-300)', fontSize: '0.72rem' }}>Verified ✦</span>
+                  </button>
+                </div>
               <div style={{ borderBottom: '1px solid var(--border-subtle)', paddingBottom: '0.75rem' }}>
                 <button
                   onClick={() => setActiveAccordion(activeAccordion === 'details' ? '' : 'details')}
@@ -445,14 +515,14 @@ export default function ProductDetailPage() {
                     padding: '0.5rem 0'
                   }}
                 >
-                  <span>Delivery & Concierge Ordering</span>
+                  <span>Delivery & Purchase Details</span>
                   {activeAccordion === 'shipping' ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </button>
                 {activeAccordion === 'shipping' && (
                   <div style={{ padding: '0.5rem 0 1rem', fontSize: '0.86rem', color: 'var(--text-secondary)', lineHeight: '1.7' }}>
                     <p>• <strong>Same-Day Nairobi Delivery:</strong> Orders confirmed before 2:00 PM are dispatched same-day via secure courier.</p>
                     <p>• <strong>Countrywide Kenya:</strong> 24–48 hours door-to-door hand-delivery across all counties.</p>
-                    <p>• <strong>Direct Concierge Ordering:</strong> Finalize your order details, payment preference, and delivery destination directly with our atelier team on WhatsApp (+254 795 439 545).</p>
+                    <p>• <strong>Direct Concierge Purchase:</strong> Complete your bag purchase, payment preference, and delivery destination directly with our team on WhatsApp (+254 795 439 545).</p>
                   </div>
                 )}
               </div>
@@ -508,6 +578,19 @@ export default function ProductDetailPage() {
           </section>
         )}
       </div>
+
+      {/* Global Interactive Modals */}
+      <MonogramStudioModal
+        isOpen={isMonogramOpen}
+        defaultProduct={product}
+        onClose={() => setIsMonogramOpen(false)}
+      />
+
+      <AuthenticityCertificateModal
+        isOpen={isCertificateOpen}
+        product={product}
+        onClose={() => setIsCertificateOpen(false)}
+      />
     </div>
   );
 }

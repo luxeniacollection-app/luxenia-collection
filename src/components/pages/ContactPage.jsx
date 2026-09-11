@@ -62,7 +62,7 @@ export default function ContactPage() {
           </h1>
 
           <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.7', margin: 0 }}>
-            Whether inquiring about the Sovereign Baguette, bespoke leather craftsmanship, or same-day delivery in Nairobi, our dedicated concierge team is at your service.
+            Whether inquiring about the Sovereign Baguette, handcrafted leather bags, or same-day delivery in Nairobi, our dedicated concierge team is at your service.
           </p>
         </div>
 
@@ -519,7 +519,7 @@ export default function ContactPage() {
                     <option value="Product Inquiry">Product Inquiry (The Sovereign Baguette)</option>
                     <option value="Same-Day Delivery">Nairobi Same-Day Express Delivery</option>
                     <option value="M-Pesa Payment">M-Pesa Payment Support</option>
-                    <option value="Corporate / Custom Gift Commission">Corporate / Bespoke Gift Commission</option>
+                    <option value="Corporate / Custom Gift Commission">Corporate / Custom Gift Commission</option>
                     <option value="General Concierge">General Concierge Care</option>
                   </select>
                 </div>

@@ -358,7 +358,7 @@ export default function AccountPage() {
                   No Bag Purchases Yet
                 </h3>
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', maxWidth: '420px', margin: '0 auto 1.75rem' }}>
-                  Your bespoke collection acquisitions will appear here with live courier dispatch and fulfillment tracking.
+                  Your luxury handbag orders will appear here with live courier dispatch and fulfillment tracking.
                 </p>
                 <Link to="/shop" className="btn-gold" style={{ padding: '0.75rem 2rem', textDecoration: 'none', display: 'inline-flex' }}>
                   Explore The Collection
@@ -433,7 +433,7 @@ export default function AccountPage() {
                       {order.status === 'Delivered' && (
                         <div style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: 'var(--radius-xs)', padding: '0.65rem 0.9rem', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', color: '#A7F3D0' }}>
                           <CheckCircle size={16} color="#34D399" style={{ flexShrink: 0 }} />
-                          <span>Delivery Completed: This bespoke piece has been safely received. Enjoy your authentic Luxe Nia collection.</span>
+                          <span>Delivery Completed: Your handcrafted handbag has been safely received. Enjoy your authentic Luxe Nia collection.</span>
                         </div>
                       )}
 

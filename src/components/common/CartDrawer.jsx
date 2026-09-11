@@ -273,7 +273,7 @@ export default function CartDrawer() {
               }}
             >
               <WhatsAppIcon size={18} color="#fff" />
-              <span>ORDER ON WHATSAPP</span>
+              <span>BUY ON WHATSAPP</span>
               <ExternalLink size={14} />
             </button>
 

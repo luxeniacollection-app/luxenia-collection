@@ -8,13 +8,21 @@ import {
   Award, 
   Truck, 
   ShoppingBag,
-  HeartHandshake
+  HeartHandshake,
+  Eye
 } from 'lucide-react';
 import { WhatsAppIcon } from '../common/SocialIcons';
 import { getWhatsAppInquiryUrl, OFFICIAL_DISPLAY_PHONE } from '../../utils/whatsapp';
 
+// Luxury Signature Modules
+import GoldParticlesHeroCanvas from '../common/GoldParticlesHeroCanvas';
+import MonogramStudioModal from '../common/MonogramStudioModal';
+import AuthenticityCertificateModal from '../common/AuthenticityCertificateModal';
+
 export default function HomePage() {
   const [activePillar, setActivePillar] = useState(0);
+  const [monogramProduct, setMonogramProduct] = useState(null);
+  const [certificateProduct, setCertificateProduct] = useState(null);
 
   const experiencePillars = [
     {
@@ -63,39 +71,42 @@ export default function HomePage() {
   return (
     <div className="homepage-brand-experience">
       {/* =================================================================
-          1. HERO SECTION: EDITORIAL FULL-SCREEN LUXURY HERO
+          1. HERO SECTION: EDITORIAL FULL-SCREEN LUXURY HERO WITH GOLD PARTICLES
           ================================================================= */}
       <section 
         className="luxury-hero"
         style={{
           position: 'relative',
-          minHeight: '88vh',
+          minHeight: '90vh',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           background: 'radial-gradient(ellipse at 50% 35%, #181522 0%, #0c0c12 55%, #050508 100%)',
           overflow: 'hidden',
-          padding: '6.5rem 1.5rem 5.5rem',
+          padding: '7rem 1.5rem 6rem',
           textAlign: 'center'
         }}
       >
+        {/* Floating Living 24K Gold Particles Canvas */}
+        <GoldParticlesHeroCanvas />
+
         {/* Ambient Gold Radial Glow */}
         <div 
           className="ambient-glow"
           style={{
             position: 'absolute',
-            top: '20%',
+            top: '25%',
             left: '50%',
-            transform: 'translate(-50%, -20%)',
-            width: '750px',
-            height: '750px',
-            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(180, 130, 40, 0.03) 45%, transparent 70%)',
+            transform: 'translate(-50%, -25%)',
+            width: '800px',
+            height: '800px',
+            background: 'radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(180, 130, 40, 0.04) 50%, transparent 70%)',
             pointerEvents: 'none',
             zIndex: 1
           }}
         />
 
-        <div className="luxe-container" style={{ position: 'relative', zIndex: 2, maxWidth: '920px', margin: '0 auto' }}>
+        <div className="luxe-container" style={{ position: 'relative', zIndex: 2, maxWidth: '960px', margin: '0 auto' }}>
           {/* Subtle Atelier Tag */}
           <div 
             style={{
@@ -113,21 +124,22 @@ export default function HomePage() {
           >
             <Crown size={14} color="var(--gold-400)" />
             <span style={{ fontSize: '0.76rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--gold-300)', fontWeight: '700' }}>
-              HAUTE MAROQUINERIE • NAIROBI
+              LUXURY HANDBAGS • NAIROBI
             </span>
           </div>
 
           {/* Brand Title */}
           <h1 
             style={{
-              fontSize: 'clamp(3rem, 7.5vw, 5.8rem)',
+              fontSize: 'clamp(3.2rem, 8vw, 6.2rem)',
               fontFamily: 'var(--font-serif)',
               fontWeight: '700',
-              letterSpacing: '0.12em',
+              letterSpacing: '0.14em',
               lineHeight: '1.05',
               marginBottom: '1rem',
               color: '#FFFFFF',
-              textTransform: 'uppercase'
+              textTransform: 'uppercase',
+              textShadow: '0 4px 30px rgba(0,0,0,0.8)'
             }}
           >
             LUXE NIA
@@ -136,7 +148,7 @@ export default function HomePage() {
           {/* Brand Signature Tagline */}
           <p 
             style={{
-              fontSize: 'clamp(1.5rem, 3.5vw, 2.5rem)',
+              fontSize: 'clamp(1.5rem, 3.5vw, 2.6rem)',
               fontFamily: 'var(--font-serif)',
               fontStyle: 'italic',
               fontWeight: '400',
@@ -155,17 +167,17 @@ export default function HomePage() {
               fontFamily: 'var(--font-sans)',
               color: 'var(--text-secondary)',
               lineHeight: '1.8',
-              maxWidth: '640px',
-              margin: '0 auto 3rem',
+              maxWidth: '660px',
+              margin: '0 auto 2.75rem',
               fontWeight: '300',
               letterSpacing: '0.02em'
             }}
           >
-            Timeless luxury pieces designed to elevate every moment. Handcrafted with reverence from full-grain leather in Nairobi.
+            Timeless leather pieces designed to command quiet reverence. Handcrafted from full-grain calfskin with antique gold fixtures in Nairobi.
           </p>
 
           {/* Hero CTAs */}
-          <div style={{ display: 'flex', gap: '1.25rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '1.25rem', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
             <Link
               to="/shop"
               className="btn-gold"
@@ -182,25 +194,27 @@ export default function HomePage() {
               }}
             >
               <ShoppingBag size={18} />
-              <span>SHOP NOW</span>
+              <span>SHOP HANDBAGS</span>
               <ArrowRight size={18} />
             </Link>
 
-            <Link
-              to="/about"
+            {/* Interactive Monogram Studio Trigger Button */}
+            <button
+              onClick={() => setMonogramProduct({ id: 'prod-001', name: 'The Sovereign Baguette Flap Bag' })}
               className="btn-gold-outline"
               style={{
-                padding: '1.2rem 2.5rem',
+                padding: '1.2rem 2.2rem',
                 fontSize: '0.92rem',
-                letterSpacing: '0.14em',
-                textDecoration: 'none',
+                letterSpacing: '0.12em',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '10px'
+                gap: '10px',
+                cursor: 'pointer'
               }}
             >
-              <span>THE ATELIER STORY</span>
-            </Link>
+              <Sparkles size={17} color="var(--gold-400)" />
+              <span>ADD YOUR INITIALS</span>
+            </button>
           </div>
         </div>
       </section>
@@ -267,7 +281,203 @@ export default function HomePage() {
       </section>
 
       {/* =================================================================
-          3. INTERACTIVE FEATURE: “THE LUXE NIA EXPERIENCE”
+          3. ARTISAN CRAFTSMANSHIP SPECIFICATIONS & MATERIAL STANDARDS
+          ================================================================= */}
+      <section 
+        className="craftsmanship-specs-section"
+        style={{
+          padding: '6.5rem 1.5rem',
+          background: '#07070A',
+          borderTop: '1px solid rgba(212, 175, 55, 0.15)',
+          borderBottom: '1px solid rgba(212, 175, 55, 0.15)'
+        }}
+      >
+        <div className="luxe-container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 4rem' }}>
+            <div 
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                background: 'rgba(212, 175, 55, 0.08)',
+                border: '1px solid rgba(212, 175, 55, 0.35)',
+                padding: '0.45rem 1.5rem',
+                borderRadius: 'var(--radius-full)',
+                marginBottom: '1.25rem'
+              }}
+            >
+              <Crown size={14} color="var(--gold-400)" />
+              <span style={{ fontSize: '0.74rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--gold-300)', fontWeight: '700' }}>
+                TECHNICAL STANDARDS & DETAILS
+              </span>
+            </div>
+
+            <h2 
+              style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
+                color: 'var(--text-pure-white)',
+                fontWeight: '700',
+                letterSpacing: '0.04em',
+                lineHeight: 1.15
+              }}
+            >
+              The Science of Leather Craft
+            </h2>
+
+            <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', marginTop: '1rem', lineHeight: '1.75' }}>
+              Every Luxe Nia handbag is engineered according to uncompromising structural tolerances, material grading, and artisan hand-finishing.
+            </p>
+          </div>
+
+          {/* 6 Technical Specification Cards */}
+          <div 
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '1.75rem',
+              marginBottom: '3.5rem'
+            }}
+          >
+            <div 
+              style={{
+                background: 'linear-gradient(160deg, #13121C 0%, #09090D 100%)',
+                border: '1px solid var(--border-gold)',
+                borderRadius: 'var(--radius-xs)',
+                padding: '2.25rem',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '0.74rem', color: 'var(--gold-300)', fontWeight: '700', letterSpacing: '0.15em', textTransform: 'uppercase' }}>SPEC 01 • MATERIAL</span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--gold-400)', background: 'rgba(212,175,55,0.1)', border: '1px solid var(--border-gold)', padding: '2px 8px', borderRadius: 'var(--radius-full)' }}>1.4mm Caliber</span>
+              </div>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'var(--text-pure-white)', marginBottom: '0.75rem' }}>Full-Grain Calf Leather</h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.7', margin: 0 }}>
+                Sourced from ethical East African tanneries. Only the uppermost layer of the hide is selected, preserving natural breathability and grain strength that gracefully ages with time.
+              </p>
+            </div>
+
+            <div 
+              style={{
+                background: 'linear-gradient(160deg, #13121C 0%, #09090D 100%)',
+                border: '1px solid var(--border-gold)',
+                borderRadius: 'var(--radius-xs)',
+                padding: '2.25rem',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '0.74rem', color: 'var(--gold-300)', fontWeight: '700', letterSpacing: '0.15em', textTransform: 'uppercase' }}>SPEC 02 • HARDWARE</span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--gold-400)', background: 'rgba(212,175,55,0.1)', border: '1px solid var(--border-gold)', padding: '2px 8px', borderRadius: 'var(--radius-full)' }}>24K Antique Plating</span>
+              </div>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'var(--text-pure-white)', marginBottom: '0.75rem' }}>Solid Forged Brass Alloy</h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.7', margin: 0 }}>
+                Twist clasps, D-rings, and zippers are forged from heavy solid alloy and electroplated with antique gold tone for scratch-resistant luster and reassuring heft.
+              </p>
+            </div>
+
+            <div 
+              style={{
+                background: 'linear-gradient(160deg, #13121C 0%, #09090D 100%)',
+                border: '1px solid var(--border-gold)',
+                borderRadius: 'var(--radius-xs)',
+                padding: '2.25rem',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '0.74rem', color: 'var(--gold-300)', fontWeight: '700', letterSpacing: '0.15em', textTransform: 'uppercase' }}>SPEC 03 • SEAMS</span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--gold-400)', background: 'rgba(212,175,55,0.1)', border: '1px solid var(--border-gold)', padding: '2px 8px', borderRadius: 'var(--radius-full)' }}>7 Stitches / Inch</span>
+              </div>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'var(--text-pure-white)', marginBottom: '0.75rem' }}>Reinforced Saddle Stitching</h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.7', margin: 0 }}>
+                Constructed using bonded tensile thread. Key stress zones—including handle anchors and base corners—receive double-backstitched reinforcements to prevent unraveling.
+              </p>
+            </div>
+
+            <div 
+              style={{
+                background: 'linear-gradient(160deg, #13121C 0%, #09090D 100%)',
+                border: '1px solid var(--border-gold)',
+                borderRadius: 'var(--radius-xs)',
+                padding: '2.25rem',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '0.74rem', color: 'var(--gold-300)', fontWeight: '700', letterSpacing: '0.15em', textTransform: 'uppercase' }}>SPEC 04 • EDGES</span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--gold-400)', background: 'rgba(212,175,55,0.1)', border: '1px solid var(--border-gold)', padding: '2px 8px', borderRadius: 'var(--radius-full)' }}>3-Layer Lacquer</span>
+              </div>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'var(--text-pure-white)', marginBottom: '0.75rem' }}>Hand-Burnished Edge Paint</h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.7', margin: 0 }}>
+                Raw cut leather edges are hand-sanded, coated with flexible edge paint, and burnished with organic beeswax to form an impervious barrier against humidity and daily wear.
+              </p>
+            </div>
+
+            <div 
+              style={{
+                background: 'linear-gradient(160deg, #13121C 0%, #09090D 100%)',
+                border: '1px solid var(--border-gold)',
+                borderRadius: 'var(--radius-xs)',
+                padding: '2.25rem',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '0.74rem', color: 'var(--gold-300)', fontWeight: '700', letterSpacing: '0.15em', textTransform: 'uppercase' }}>SPEC 05 • INTERIOR</span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--gold-400)', background: 'rgba(212,175,55,0.1)', border: '1px solid var(--border-gold)', padding: '2px 8px', borderRadius: 'var(--radius-full)' }}>Satin Jacquard</span>
+              </div>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'var(--text-pure-white)', marginBottom: '0.75rem' }}>Protective Interior Vault</h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.7', margin: 0 }}>
+                Lined in smooth midnight satin jacquard that protects delicate personal items, sunglasses, and phones from abrasion, complete with a zip compartment and gold-foil leather patch.
+              </p>
+            </div>
+
+            <div 
+              style={{
+                background: 'linear-gradient(160deg, #13121C 0%, #09090D 100%)',
+                border: '1px solid var(--border-gold)',
+                borderRadius: 'var(--radius-xs)',
+                padding: '2.25rem',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '0.74rem', color: 'var(--gold-300)', fontWeight: '700', letterSpacing: '0.15em', textTransform: 'uppercase' }}>SPEC 06 • AUTHENTICITY</span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--gold-400)', background: 'rgba(212,175,55,0.1)', border: '1px solid var(--border-gold)', padding: '2px 8px', borderRadius: 'var(--radius-full)' }}>Verified Guarantee</span>
+              </div>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'var(--text-pure-white)', marginBottom: '0.75rem' }}>Individually Certified</h3>
+              <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.7', margin: 0 }}>
+                Every handbag is authenticated with an internal registry number and accompanied by our official certificate guaranteeing genuine calfskin provenance and Nairobi artisan assembly.
+              </p>
+            </div>
+          </div>
+
+          {/* Interactive Certificate Inspection Action */}
+          <div style={{ textAlign: 'center' }}>
+            <button
+              onClick={() => setCertificateProduct({ id: 'prod-001', name: 'The Sovereign Baguette Flap Bag', priceKes: 5800 })}
+              className="btn-gold-outline"
+              style={{
+                padding: '1rem 2.25rem',
+                fontSize: '0.88rem',
+                letterSpacing: '0.12em',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '10px',
+                cursor: 'pointer'
+              }}
+            >
+              <ShieldCheck size={18} color="var(--gold-400)" />
+              <span>INSPECT CERTIFICATE OF AUTHENTICITY</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* =================================================================
+          4. INTERACTIVE FEATURE: “THE LUXE NIA EXPERIENCE”
           ================================================================= */}
       <section 
         className="experience-section"
@@ -385,7 +595,7 @@ export default function HomePage() {
       </section>
 
       {/* =================================================================
-          4. BRAND STATEMENT: LARGE EDITORIAL TYPOGRAPHY
+          5. BRAND STATEMENT: LARGE EDITORIAL TYPOGRAPHY
           ================================================================= */}
       <section 
         className="brand-statement-section"
@@ -397,7 +607,6 @@ export default function HomePage() {
           textAlign: 'center'
         }}
       >
-        {/* Subtle Ambient Background Watermark */}
         <div 
           className="brand-statement-watermark"
           style={{
@@ -455,7 +664,7 @@ export default function HomePage() {
       </section>
 
       {/* =================================================================
-          5. SHOP CALL TO ACTION: READY TO CARRY LUXURY?
+          6. SHOP CALL TO ACTION: READY TO CARRY LUXURY?
           ================================================================= */}
       <section 
         className="home-shop-cta"
@@ -547,6 +756,19 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Global Interactive Modals Triggered From Home */}
+      <MonogramStudioModal
+        isOpen={!!monogramProduct}
+        defaultProduct={monogramProduct}
+        onClose={() => setMonogramProduct(null)}
+      />
+
+      <AuthenticityCertificateModal
+        isOpen={!!certificateProduct}
+        product={certificateProduct}
+        onClose={() => setCertificateProduct(null)}
+      />
     </div>
   );
 }

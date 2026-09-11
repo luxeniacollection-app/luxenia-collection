@@ -18,7 +18,7 @@ export default function WhatsAppConcierge() {
     '👜 Inquire about The Sovereign Baguette Flap Bag',
     '🚚 Inquire about Same-Day Nairobi Express Courier',
     '💳 Inquire about Ordering & Payment Options',
-    '👑 Inquire about Custom Colorways & Bespoke Orders'
+    '👑 Inquire about Custom Colorways & Special Orders'
   ];
 
   const handleSend = (textToSend) => {

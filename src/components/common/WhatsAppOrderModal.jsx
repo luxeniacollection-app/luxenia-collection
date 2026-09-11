@@ -141,15 +141,15 @@ export default function WhatsAppOrderModal({ isOpen, onClose, orderData }) {
           >
             <WhatsAppIcon size={14} color="#25D366" />
             <span style={{ fontSize: '0.72rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#25D366', fontWeight: '700' }}>
-              DIRECT WHATSAPP ORDER
+              BUY VIA WHATSAPP
             </span>
           </div>
 
           <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--text-pure-white)', margin: '0 0 0.4rem' }}>
-            Order on WhatsApp
+            {isCartOrder ? 'Buy Bags on WhatsApp' : 'Buy Bag on WhatsApp'}
           </h2>
           <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: 0 }}>
-            Enter your name below to start your order with the LUXE NIA concierge.
+            Enter your name below to complete your purchase directly with our concierge.
           </p>
         </div>
 
@@ -282,7 +282,7 @@ export default function WhatsAppOrderModal({ isOpen, onClose, orderData }) {
             }}
           >
             <WhatsAppIcon size={20} color="#fff" />
-            <span>CONTINUE TO WHATSAPP</span>
+            <span>BUY NOW ON WHATSAPP</span>
           </button>
         </form>
 

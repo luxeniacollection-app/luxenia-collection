@@ -6,7 +6,8 @@ import {
   ExternalLink,
   Sparkles,
   Check,
-  Crown
+  Crown,
+  ShieldCheck
 } from 'lucide-react';
 import { WhatsAppIcon } from '../common/SocialIcons';
 import { useProducts } from '../../context/ProductContext';
@@ -15,6 +16,8 @@ import { useToast } from '../common/Toast';
 import { useWhatsAppOrder } from '../../context/WhatsAppOrderContext';
 import { getWhatsAppProductOrderUrl, OFFICIAL_DISPLAY_PHONE } from '../../utils/whatsapp';
 import { initialProducts } from '../../data/products';
+import MonogramStudioModal from '../common/MonogramStudioModal';
+import AuthenticityCertificateModal from '../common/AuthenticityCertificateModal';
 
 export default function ShopPage({ onOpenQuickView }) {
   const navigate = useNavigate();
@@ -24,6 +27,9 @@ export default function ShopPage({ onOpenQuickView }) {
   const { openWhatsAppOrder } = useWhatsAppOrder();
 
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [monogramProduct, setMonogramProduct] = useState(null);
+  const [certificateProduct, setCertificateProduct] = useState(null);
+  const [activeColorMap, setActiveColorMap] = useState({});
 
   // Fallback to initialProducts to guarantee products are always visible
   const allProducts = (Array.isArray(contextProducts) && contextProducts.length > 0) 
@@ -34,13 +40,26 @@ export default function ShopPage({ onOpenQuickView }) {
     ? allProducts 
     : allProducts.filter(p => p.category === selectedCategory);
 
+  const handleSelectColor = (productId, colorObj) => {
+    setActiveColorMap(prev => ({
+      ...prev,
+      [productId]: colorObj
+    }));
+  };
+
   const handleQuickAdd = (product) => {
     const isOutOfStock = Number(product.stock) <= 0 || product.status === 'out_of_stock';
     if (isOutOfStock) {
       addToast(`"${product.name}" is currently out of stock.`, 'error');
       return;
     }
-    addToCart(product, product.sizes?.[0] || 'Classic Baguette (28cm)', product.colors?.[0] || null, 1);
+    const chosenColor = activeColorMap[product.id] || product.colors?.[0] || null;
+    addToCart(
+      { ...product, image: chosenColor?.image || product.image },
+      product.sizes?.[0] || 'Classic Baguette (28cm)',
+      chosenColor,
+      1
+    );
     addToast(`Added "${product.name}" to your shopping bag.`, 'gold');
   };
 
@@ -48,7 +67,7 @@ export default function ShopPage({ onOpenQuickView }) {
     <div className="shop-page" style={{ padding: '3.5rem 0 6rem', background: 'var(--bg-black)', minHeight: '85vh' }}>
       <div className="luxe-container">
         {/* Clean Luxury Title */}
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <div 
             style={{
               display: 'inline-flex',
@@ -77,7 +96,7 @@ export default function ShopPage({ onOpenQuickView }) {
 
           <h1 
             style={{ 
-              fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)', 
+              fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)', 
               fontFamily: 'var(--font-serif)', 
               color: 'var(--text-pure-white)', 
               marginBottom: '0.75rem',
@@ -87,9 +106,37 @@ export default function ShopPage({ onOpenQuickView }) {
             The Handbag Collection
           </h1>
 
-          <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', maxWidth: '640px', margin: '0 auto', lineHeight: '1.7' }}>
-            Handcrafted in supple full-grain calf leather with bespoke artisan detailing. Available in signature silhouettes and rich tones with express same-day Nairobi delivery.
+          <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', maxWidth: '640px', margin: '0 auto 1.75rem', lineHeight: '1.7' }}>
+            Handcrafted in supple full-grain calf leather with authentic artisan detailing. Available in signature silhouettes and rich tones with express same-day Nairobi delivery.
           </p>
+
+          {/* Custom Initials Banner Pill */}
+          <div style={{ display: 'inline-flex', justifyContent: 'center' }}>
+            <button
+              onClick={() => setMonogramProduct(filteredProducts[0] || initialProducts[0])}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '0.65rem 1.75rem',
+                background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.16) 0%, rgba(150, 109, 33, 0.08) 100%)',
+                border: '1px solid var(--gold-400)',
+                borderRadius: 'var(--radius-full)',
+                color: 'var(--gold-300)',
+                fontSize: '0.78rem',
+                fontWeight: '700',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                cursor: 'pointer',
+                boxShadow: '0 4px 15px rgba(212,175,55,0.15)',
+                transition: 'all 0.25s ease'
+              }}
+            >
+              <Sparkles size={14} color="var(--gold-400)" />
+              <span>Add Custom Gold Initials to Any Bag</span>
+              <Crown size={13} color="var(--gold-400)" />
+            </button>
+          </div>
         </div>
 
         {/* The Bags Grid */}
@@ -102,6 +149,8 @@ export default function ShopPage({ onOpenQuickView }) {
         >
           {filteredProducts.map(product => {
             const isOutOfStock = Number(product.stock) <= 0 || product.status === 'out_of_stock';
+            const activeColor = activeColorMap[product.id] || product.colors?.[0] || null;
+            const currentImg = activeColor?.image || product.image;
 
             return (
               <div 
@@ -114,7 +163,9 @@ export default function ShopPage({ onOpenQuickView }) {
                   overflow: 'hidden',
                   display: 'flex',
                   flexDirection: 'column',
-                  position: 'relative'
+                  position: 'relative',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+                  transition: 'all 0.3s ease'
                 }}
               >
                 {/* Product Image */}
@@ -124,7 +175,7 @@ export default function ShopPage({ onOpenQuickView }) {
                   style={{ cursor: 'pointer', aspectRatio: '4/5', background: 'var(--bg-deep)', overflow: 'hidden', position: 'relative' }}
                 >
                   <img 
-                    src={product.image} 
+                    src={currentImg} 
                     alt={product.name} 
                     style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.4s ease' }} 
                   />
@@ -148,6 +199,33 @@ export default function ShopPage({ onOpenQuickView }) {
                       {product.tags?.[0] || 'Atelier Drop'}
                     </span>
                   </div>
+
+                  {/* Certificate Quick Badge */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCertificateProduct(product);
+                    }}
+                    title="Inspect Authenticity Seal"
+                    style={{
+                      position: 'absolute',
+                      top: '12px',
+                      right: '12px',
+                      background: 'rgba(12, 10, 18, 0.85)',
+                      border: '1px solid var(--border-gold)',
+                      borderRadius: '50%',
+                      width: '32px',
+                      height: '32px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'var(--gold-400)',
+                      cursor: 'pointer',
+                      zIndex: 3
+                    }}
+                  >
+                    <ShieldCheck size={16} />
+                  </button>
 
                   {/* Quick Actions Hover */}
                   <div className="product-card-quick-actions" onClick={(e) => e.stopPropagation()}>
@@ -188,25 +266,35 @@ export default function ShopPage({ onOpenQuickView }) {
                       {product.subtitle}
                     </p>
 
-                    {/* Color Swatch Previews */}
+                    {/* Color Swatch Previews with Direct Switcher */}
                     {product.colors && product.colors.length > 0 && (
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '1.25rem' }}>
-                        {product.colors.map((c, cIdx) => (
-                          <span
-                            key={cIdx}
-                            title={c.name}
-                            style={{
-                              width: '16px',
-                              height: '16px',
-                              borderRadius: '50%',
-                              backgroundColor: c.hex,
-                              border: '1px solid rgba(212,175,55,0.4)',
-                              display: 'inline-block'
-                            }}
-                          />
-                        ))}
-                        <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginLeft: '4px' }}>
-                          {product.colors.map(c => c.name).join(' • ')}
+                        {product.colors.map((c, cIdx) => {
+                          const isSelected = (activeColor?.name === c.name);
+                          return (
+                            <button
+                              type="button"
+                              key={cIdx}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleSelectColor(product.id, c);
+                              }}
+                              title={`${c.name} — Click to view`}
+                              style={{
+                                width: '20px',
+                                height: '20px',
+                                borderRadius: '50%',
+                                backgroundColor: c.hex,
+                                border: isSelected ? '2px solid #FFF' : '1px solid rgba(212,175,55,0.4)',
+                                outline: isSelected ? '1px solid var(--gold-400)' : 'none',
+                                cursor: 'pointer',
+                                padding: 0
+                              }}
+                            />
+                          );
+                        })}
+                        <span style={{ fontSize: '0.72rem', color: 'var(--gold-300)', marginLeft: '4px', fontWeight: '600' }}>
+                          {activeColor?.name || product.colors[0].name}
                         </span>
                       </div>
                     )}
@@ -236,11 +324,12 @@ export default function ShopPage({ onOpenQuickView }) {
                         <button
                           onClick={() => {
                             openWhatsAppOrder({
-                              bagName: product.name,
+                              bagName: `${product.name} (${activeColor?.name || 'Classic'})`,
                               quantity: 1,
                               bagPrice: product.priceKes,
                               totalPrice: product.priceKes,
-                              image: product.image
+                              image: currentImg,
+                              color: activeColor?.name
                             });
                           }}
                           style={{
@@ -263,7 +352,7 @@ export default function ShopPage({ onOpenQuickView }) {
                           }}
                         >
                           <WhatsAppIcon size={16} color="#fff" />
-                          <span>ORDER ON WHATSAPP</span>
+                          <span>BUY ON WHATSAPP</span>
                         </button>
                       ) : (
                         <button
@@ -292,6 +381,31 @@ export default function ShopPage({ onOpenQuickView }) {
                           <span>INQUIRE RE-STOCK</span>
                         </button>
                       )}
+
+                      {/* Custom Initials Trigger Button */}
+                      <button
+                        onClick={() => setMonogramProduct(product)}
+                        style={{
+                          width: '100%',
+                          padding: '0.65rem',
+                          fontSize: '0.76rem',
+                          background: 'rgba(212, 175, 55, 0.08)',
+                          border: '1px solid var(--border-gold)',
+                          borderRadius: 'var(--radius-xs)',
+                          color: 'var(--gold-300)',
+                          fontWeight: '700',
+                          letterSpacing: '0.08em',
+                          textTransform: 'uppercase',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '6px'
+                        }}
+                      >
+                        <Sparkles size={13} />
+                        <span>Add Your Gold Initials</span>
+                      </button>
 
                       <div style={{ display: 'flex', gap: '8px' }}>
                         <button
@@ -329,6 +443,19 @@ export default function ShopPage({ onOpenQuickView }) {
           })}
         </div>
       </div>
+
+      {/* Global Modals Triggered in Shop */}
+      <MonogramStudioModal
+        isOpen={!!monogramProduct}
+        defaultProduct={monogramProduct}
+        onClose={() => setMonogramProduct(null)}
+      />
+
+      <AuthenticityCertificateModal
+        isOpen={!!certificateProduct}
+        product={certificateProduct}
+        onClose={() => setCertificateProduct(null)}
+      />
     </div>
   );
 }
